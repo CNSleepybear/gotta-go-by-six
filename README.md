@@ -12,6 +12,8 @@ A bite-sized, bilingual, replayable **commute-survival arcade game**, inspired b
 
 
 
+![Gameplay screenshot](assets/gameplay.png)
+
 ## 🎮 Play locally
 
 1. Download or clone this repository.
@@ -47,6 +49,8 @@ No package installation or development server is needed for local play. Online s
 
 ### Share a run
 
+![Sample result poster](assets/share-poster.png)
+
 
 
 - **Save PNG:** download a rendered result poster.
@@ -72,6 +76,9 @@ For GitHub Pages, enable Pages in the repository settings and select the branch/
 ```text
 gotta-go-by-six/
 ├── index.html              # Complete playable game (v0.6)
+├── assets/
+│   ├── gameplay.png        # Real gameplay screenshot
+│   └── share-poster.png    # Generated result poster
 ├── README.md               # English-first documentation
 ├── README.zh-CN.md         # 中文说明
 ├── LICENSE                 # MIT License

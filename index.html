@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#141b1a"><meta name="description" content="A Guangzhou commute survival game."><title>Gotta Go by Six | Cat Commute v0.6</title>
+<style>
+:root{--ink:#121917;--panel:#1f2926;--panel2:#27342f;--stroke:#48574b;--cream:#f8eed4;--muted:#b6c2b1;--gold:#ffd288;--orange:#f3a56f;--red:#f67d72;--green:#a3dbac;--blue:#bad6d4}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#111814;color:var(--cream);font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif}body{background:radial-gradient(ellipse 90% 50% at 50% -15%,#35493b 0,#1c2621 60%,#101713 100%)}button{font:inherit;cursor:pointer}button:focus-visible{outline:2px solid #ffe0a4;outline-offset:3px}button:disabled{opacity:.45;cursor:not-allowed}.shell{max-width:1580px;margin:auto;padding:14px 19px 18px}.top{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:12px}.brand{display:flex;gap:12px;align-items:center}.mark{width:49px;height:49px;display:grid;place-items:center;background:#f7bd73;color:#312a24;border-radius:11px;box-shadow:4px 5px 0 #a76c4c;font-size:27px;transform:rotate(-5deg)}.eyebrow{font-weight:900;letter-spacing:.22em;color:#dbbb8b;font-size:10px}.brand h1{font-size:25px;margin:0;letter-spacing:.065em;color:#ffe6a9;text-shadow:2px 3px 0 #554234}.brand h1 span{font-size:13px;color:#d6d9bf;letter-spacing:.02em}.toptag{display:flex;gap:10px;align-items:center}.build{font-weight:850;border:1px solid #768b74;border-radius:7px;padding:8px 12px;background:#293b30;color:#bff0c8;font-size:11px;white-space:nowrap}.btn{background:#34453b;border:1px solid #85927b;color:#f6e7c3;border-radius:7px;padding:9px 12px;font-weight:850}.btn:hover{background:#47604a}.langbtn,.overlay-lang{border-color:#e4bc80;color:#ffe3af;min-width:85px;white-space:nowrap}.event-card{position:relative}.event-card .overlay-lang{float:right;padding:5px 10px;font-size:12px}.share-topcontrols{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.brand h1{font-size:clamp(19px,1.8vw,25px)!important}.brand h1 span{font-size:clamp(10px,1vw,13px)!important}.hud{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:11px}.metric{border:1px solid #4b594c;background:linear-gradient(130deg,#26372f,#1d2925);padding:10px 13px;border-radius:9px;min-width:0}.mhead{display:flex;align-items:center;justify-content:space-between;gap:8px;color:#b4c1ad;font-size:11px;font-weight:800}.mhead span:last-child{color:#edc594;white-space:nowrap}.value{font-size:23px;font-weight:1000;letter-spacing:.03em;margin:4px 0 5px;font-variant-numeric:tabular-nums}.value.sm{font-size:20px}.meter{height:7px;background:#121b19;border:1px solid #52614d;border-radius:7px;overflow:hidden}.fill{height:100%;width:100%;transition:width .15s linear;background:linear-gradient(90deg,#debd80,#f2e0ad)}.playarea{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(320px,.81fr);gap:12px}.leftcol,.rightcol{min-width:0}.stage{aspect-ratio:16/9;position:relative;border:5px solid #61705c;outline:1px solid #9aa68a;border-radius:9px;background:#d8ad7d;overflow:hidden;box-shadow:0 16px 35px #050a0880}.stage:after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(10,10,10,.035) 0px,rgba(10,10,10,.035) 1px,transparent 2px,transparent 5px);box-shadow:inset 0 0 58px #34201b60;z-index:2}.stage canvas{width:100%;height:100%;display:block;image-rendering:pixelated}.stags{position:absolute;z-index:3;display:flex;top:13px;left:13px;gap:7px;flex-wrap:wrap;pointer-events:none}.chip{font-size:11px;background:#252f2be0;border:1px solid #889178b0;padding:7px 10px;border-radius:5px;font-weight:900;box-shadow:3px 3px 0 #161e1b66}.prompt{position:absolute;z-index:3;bottom:12px;left:14px;right:14px;pointer-events:none;display:flex;justify-content:space-between;align-items:end;gap:10px}.mission{font-size:12px;max-width:min(540px,73%);font-weight:850;background:#26302ccf;border:1px solid #788573b0;padding:9px 11px;border-radius:6px;text-shadow:0 2px 2px #111}.interact{font-size:12px;font-weight:950;color:#241b12;background:#ffdc9a;padding:10px 12px;border:2px solid #fff1c0;box-shadow:3px 4px 0 #8f563f;min-width:90px}.interact:empty{display:none}.routepanel,.guide,.catpanel,.gearbox{border:1px solid #50634f;background:#202c26;border-radius:9px;padding:13px;margin-top:11px}.section{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.section strong{font-size:13px;letter-spacing:.025em}.hint{font-size:11px;color:#b9c6b5}.route{display:flex;gap:5px}.node{position:relative;flex:1;min-width:0;text-align:center;border:1px solid #596b58;background:#2a342e;padding:8px 3px 7px;border-radius:6px;color:#b2bdb0;font-size:10px}.node b{display:block;font-size:20px;margin-bottom:3px}.node.current{border-color:#ffd68c;background:#554734;color:#ffe9bd;box-shadow:inset 0 -3px 0 #f4be72}.node.done{border-color:#89aa89;background:#304b37;color:#d3e9cc}.guide{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:12px;padding:10px 13px;margin-top:11px}.guide .key{display:inline-block;padding:2px 6px;background:#36463c;border:1px solid #819079;border-radius:4px;color:#ffdaa0;font-weight:900}.guide .legend{color:#c5ceb9}.catpanel{margin-top:0}.cattop{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}.live{font-size:11px;color:#f59e8d;font-weight:900;letter-spacing:.065em}.catmood{font-weight:900;font-size:13px;color:#ffe6be}.catcanvas{display:block;width:100%;aspect-ratio:16/10;image-rendering:pixelated;border:4px solid #647464;background:#a2967b;margin:9px 0;border-radius:5px}.catnarr{font-size:12px;line-height:1.65;color:#d2d2bf;min-height:36px}.sideactions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}.action{padding:10px 8px;border-radius:6px;border:1px solid #a1a780;background:#394639;color:#ffe5b9;font-weight:900;font-size:12px}.action:hover{background:#52644c}.action em{font-size:10px;color:#c0c8ad;font-style:normal;display:block;font-weight:500;margin-top:3px}.gearbox{margin-top:10px}.gear{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:9px}.tag{display:inline-block;background:#39483c;border:1px solid #72856b;color:#e9e3c7;padding:5px 8px;font-size:11px;border-radius:5px}.log{font-size:11px;color:#dbc99e;line-height:1.7;border-top:1px dashed #657260;padding-top:8px;min-height:48px}.footer{display:flex;justify-content:space-between;font-size:11px;color:#91a494;margin-top:12px;gap:10px}.overlay{position:absolute;inset:0;background:#101916ba;z-index:8;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}.overlay.show{display:flex}.modal{width:min(490px,96%);border:2px solid #b7ac86;background:linear-gradient(155deg,#2e4035,#1d2826);box-shadow:0 19px 0 #111b1866,0 30px 65px #000b;text-align:center;padding:26px 24px 23px;border-radius:9px}.modal .catface{font-size:48px;line-height:1.2}.modal .mini{color:#ddb67b;letter-spacing:.2em;font-size:11px;font-weight:900;margin:7px 0}.modal h2{font-size:28px;margin:6px 0 10px;color:#ffdc9c}.modal p{color:#d2d9c7;font-size:13px;line-height:1.85;margin:10px 0 14px}.modal .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:15px}.modal .grid div{background:#192621;border:1px solid #52604e;padding:10px 4px;font-size:11px;color:#ced6c8}.modal .grid b{font-size:19px;display:block;color:#ffe0a4}.primary{width:100%;padding:13px 14px;background:#f0b874;color:#32271e;border:2px solid #ffe2a4;border-radius:7px;box-shadow:0 5px 0 #94633d;font-weight:1000;font-size:16px}.primary:hover{filter:brightness(1.08)}.small{font-size:11px!important;color:#acbbad!important;margin:10px 0 0!important}.toast{position:fixed;z-index:30;top:20px;left:50%;transform:translate(-50%,-15px);padding:10px 18px;background:#293c2f;border:1px solid #e3bf82;color:#ffe8bd;font-weight:850;font-size:12px;border-radius:7px;box-shadow:0 10px 24px #0008;opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;max-width:85vw;text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}.mobile{display:none}.danger .catmood{color:#ff8b76}@media(max-width:980px){.playarea{grid-template-columns:1fr}.rightcol{display:grid;grid-template-columns:1.08fr .92fr;gap:10px}.catpanel,.gearbox{margin-top:10px}.catpanel{margin-top:10px}.catcanvas{max-height:185px;object-fit:fill}}@media(max-width:650px){.shell{padding:10px 9px 18px}.brand h1{font-size:19px}.brand h1 span{display:none}.eyebrow{font-size:8px}.mark{width:38px;height:38px;font-size:22px}.toptag .build{display:none}.toptag{gap:5px}.langbtn{padding:9px 7px;min-width:73px;font-size:12px}.hud{grid-template-columns:1fr 1fr;gap:6px}.metric{padding:7px 9px}.value{font-size:18px}.value.sm{font-size:16px}.mhead{font-size:10px}.playarea{display:block}.stage{border-width:3px}.stag{font-size:10px}.stags{top:7px;left:7px}.chip{padding:5px 6px;font-size:9px}.mission{font-size:10px;padding:6px 7px}.interact{font-size:10px;padding:6px}.rightcol{display:block}.catpanel,.gearbox{margin-top:9px}.catcanvas{height:158px}.guide{display:none}.footer{font-size:9px}.modal{padding:19px 16px}.modal h2{font-size:23px}.mobile{display:flex;justify-content:space-between;align-items:end;gap:10px;margin:11px 0 3px;touch-action:none;user-select:none}.dpad{display:grid;grid-template-areas:'. up .' 'left down right';grid-template-columns:repeat(3,49px);grid-template-rows:repeat(2,45px);gap:4px}.touch{background:#354c3d;border:1px solid #9ab08e;border-radius:8px;color:#ffda9d;font-size:17px;font-weight:900;touch-action:none;user-select:none;box-shadow:0 3px 0 #17231d}.touch:active,.touch.pressed{background:#6d7451;transform:translateY(2px)}.up{grid-area:up}.down{grid-area:down}.leftbtn{grid-area:left}.rightbtn{grid-area:right}.touchactions{display:flex;gap:6px}.touchactions .touch{min-width:53px;min-height:65px;font-size:11px;padding:3px}.touchactions .touch:first-child{background:#79603d;color:#fff1cb}}
+.chip.threat{color:#fff0ce;border-color:#e4b77b;background:#494539db;transition:background .15s,border-color .15s}.chip.threat.active{background:#9d3f31ef;border-color:#ffd08b;color:#fff7dd;animation:dangerflash .46s infinite alternate}@keyframes dangerflash{from{box-shadow:0 0 0 #fff0a900}to{box-shadow:0 0 18px #ff664eaa}}@media(max-width:650px){.chip.threat{font-size:9px}}
+.chip.combo{color:#fee9b4;background:#424334ea;border-color:#ac9062}.chip.combo.hot{background:#895333;border-color:#ffcc72;animation:dangerflash .6s alternate infinite}.rewardrow{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-bottom:12px}.rewardrow .award{padding:5px 9px;background:#435a42;border:1px solid #b6c38d;border-radius:5px;color:#ffeba9;font-weight:850;font-size:11px}.share-main{margin:0 0 13px;background:#ca7858;color:#fff2ce;border-color:#f5c486;box-shadow:0 4px 0 #6d493b}.modal{max-height:90%;overflow-y:auto;scrollbar-width:thin}.share-layer,.event-layer{position:fixed;inset:0;z-index:90;background:#0b1716e8;display:flex;align-items:center;justify-content:center;padding:15px;backdrop-filter:blur(7px)}.share-layer[hidden],.event-layer[hidden],.rewardrow[hidden],.share-main[hidden]{display:none!important}.share-panel{width:min(960px,98vw);max-height:96vh;overflow:auto;background:linear-gradient(145deg,#2a3b32,#182720);border:2px solid #a49e77;padding:20px;border-radius:12px;box-shadow:0 26px 80px #000c}.share-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px}.share-head h2{margin:4px 0;color:#ffdfa0;font-size:23px}.share-layout{display:grid;grid-template-columns:minmax(220px,.82fr) minmax(310px,1.18fr);gap:21px}.poster-wrap{display:flex;flex-direction:column;align-items:center;gap:6px;background:#16221d;padding:11px;border:1px solid #546d57;border-radius:9px}.poster-wrap img{width:100%;max-width:330px;aspect-ratio:4/5;object-fit:contain;background:#17211d;box-shadow:0 7px 19px #0007}.poster-wrap span{color:#aebbaa;font-size:11px;text-align:center}.share-ctrl{display:flex;flex-direction:column;gap:10px}.share-caption{white-space:pre-wrap;font-size:13px;line-height:1.75;color:#f9e5bd;margin:0;background:#17251f;border:1px dashed #647560;border-radius:8px;padding:13px}.sharebtn{width:100%;border:1px solid #809177;background:#344b3c;color:#fff0cc;font-weight:850;padding:11px 14px;border-radius:7px;text-align:left;font-size:13px}.sharebtn:hover{background:#4c6249}.sharebtn.gold{background:#efbd7a;color:#2a221e;border-color:#ffe6b6}.share-social{display:grid;grid-template-columns:1fr 1fr;gap:8px}.share-note{font-size:11px;color:#aebcad;line-height:1.8;margin:0}.share-status{min-height:21px;font-size:12px;color:#c8dfa9}.event-card{width:min(480px,95vw);background:linear-gradient(160deg,#344c3c,#1e2f28);text-align:center;border:2px solid #e3be81;box-shadow:0 15px 50px #000b;border-radius:10px;padding:22px}.event-label{font-size:10px;color:#e2be84;letter-spacing:.16em;font-weight:900}.event-icon{font-size:48px;margin-top:14px}.event-card h2{margin:8px 0;color:#ffe0a3}.event-card p{font-size:13px;line-height:1.75;color:#d4dbbf;min-height:52px}.event-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:15px 0}.event-choice{border:1px solid #c7b487;background:#334c3d;color:#fff1cc;border-radius:8px;padding:14px 9px;font-weight:850;font-size:12px;min-height:66px;white-space:pre-line}.event-choice:hover{background:#586c4e}.event-card small{color:#c2c7ad}@media(max-width:700px){.share-layer,.event-layer{padding:8px;align-items:start}.share-panel{padding:13px;max-height:97dvh}.share-head h2{font-size:18px}.share-layout{grid-template-columns:1fr;gap:10px}.poster-wrap img{max-width:240px}.share-social{grid-template-columns:1fr 1fr}.share-social .sharebtn{font-size:11px;padding:10px 6px}.event-layer{align-items:center}.event-card{padding:17px}.event-choice{font-size:11px}}
+@media(max-width:650px){.stage .overlay.show{position:fixed;inset:0;z-index:1000;padding:15px 10px;align-items:center;overflow-y:auto}.stage .overlay .modal{position:relative;width:min(365px,100%);max-height:none;margin:auto;padding:18px 14px}.stage .overlay .modal p{line-height:1.65;margin:8px 0 12px}.stage .overlay .modal .catface{font-size:40px}.modal .overlay-lang{position:absolute;top:12px;right:12px;padding:5px 9px;font-size:11px}} @media(min-width:651px){.modal .overlay-lang{display:none}} 
+/* v0.6: replay loop + daily code */
+.mode-setup{background:#16251f;border:1px solid #77957a;padding:11px;border-radius:9px;margin:12px 0;text-align:left}
+.mode-row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.mode-btn{background:#304037;border:1px solid #6c806c;color:#e9d9b8;border-radius:6px;padding:9px 4px;font-size:11px;font-weight:850}.mode-btn.active{background:#eab679;color:#30241d;border-color:#ffe3a1}.mode-hint{font-size:11px;color:#d6c9a7;line-height:1.5;margin-top:8px;min-height:17px}.seed-entry{margin-top:8px;display:flex;gap:7px;align-items:center}.seed-entry[hidden]{display:none}.seed-entry input{flex:1;min-width:0;padding:10px;border:1px solid #9b9e79;border-radius:6px;background:#0f1916;color:#ffe4a7;font:800 14px monospace;text-transform:uppercase}.seed-entry small{font-size:10px;color:#f2cb91}
+.chaos-panel{margin-top:10px;padding:10px 12px;border-radius:8px;background:linear-gradient(90deg,#293d32,#202d28);border:1px solid #66836b}.chaos-head{display:flex;justify-content:space-between;gap:6px;align-items:center;font-size:11px;font-weight:900;color:#f6d99d}.chaos-body{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.chaos-pill{background:#344d42;border:1px solid #9bb294;border-radius:5px;padding:7px 9px;font-size:11px;color:#f7edcf}.chaos-pill b{display:block;color:#ffda9a;font-size:11px}.chaos-pill span{font-size:10px;color:#cfdbbe}.chaos-goal{margin-top:8px;font-size:11px;border-top:1px solid #526858;padding-top:7px;color:#e3e4c8}.chaos-goal.completed{color:#acffc5}.chaos-seed{font-family:monospace;color:#ffcf91}
+.big-moment{position:absolute;z-index:5;pointer-events:none;top:42%;left:50%;transform:translate(-50%,-50%) scale(.84);width:min(84%,510px);text-align:center;background:#1a2b25eb;color:#ffe5af;border:3px solid #ffcc86;border-radius:9px;padding:13px 10px;box-shadow:0 9px 0 #553b29aa,0 25px 55px #0009;font-size:clamp(14px,2vw,23px);font-weight:1000;opacity:0;transition:opacity .15s,transform .15s}.big-moment.show{opacity:1;transform:translate(-50%,-50%) scale(1)}.big-moment small{display:block;font-size:10px;letter-spacing:.18em;color:#b9caaa;margin-bottom:4px}.screen-bump{animation:screenBump .24s ease-out}@keyframes screenBump{0%{transform:translate(4px,-3px)}35%{transform:translate(-5px,3px)}70%{transform:translate(2px,-2px)}100%{transform:none}}
+.run-record{display:flex;justify-content:center;gap:5px;align-items:center;margin-top:7px;color:#e2d9b5;font-size:11px;flex-wrap:wrap}.challenge-btns{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:8px 0}.challenge-btns button{border:1px solid #c5a777;background:#405343;color:#ffeac8;border-radius:6px;padding:10px 6px;font-size:12px;font-weight:900}.highlight-tag{margin-top:7px;padding:8px 10px;border:1px solid #caaf78;background:#423d2e;border-radius:5px;font-size:11px;color:#ffe2a7}
+@media(max-width:650px){.mode-setup{margin:8px 0;padding:7px}.mode-btn{padding:6px 2px;font-size:10px}.mode-hint{font-size:10px;margin-top:5px;min-height:0}.seed-entry input{padding:6px}.chaos-pill{padding:6px;font-size:10px}.big-moment{top:48%;padding:7px}.chaos-panel{padding:8px}.challenge-btns{grid-template-columns:1fr 1fr}}
+
+
+/* v0.6 final dialog polish: keep CTA visible and share above mobile overlay */
+.share-layer{z-index:1300!important}.event-layer{z-index:1200!important}
+.modal{max-height:calc(100% - 14px);overflow-y:auto;scrollbar-width:thin;padding:17px 20px 15px}
+.modal .catface{font-size:38px}.modal .mini{margin:4px 0}.modal h2{font-size:25px;margin:4px 0 7px}.modal p{font-size:12px;line-height:1.6;margin:7px 0 8px}.modal .grid{margin-bottom:6px}.modal .grid div{padding:6px 3px}.modal .grid b{font-size:17px}.modal #modalButton{margin:7px 0 8px;padding:10px 12px}
+.mode-setup{margin:8px 0;padding:8px}.mode-row .mode-btn{padding:8px 3px}.mode-hint{margin-top:5px}
+@media(max-width:650px){.modal{max-height:calc(100dvh - 36px);padding:15px 12px}.modal h2{font-size:22px}.modal .catface{font-size:37px}.modal .grid div{padding:8px 2px}}
+</style>
+</head>
+<body>
+<div class="shell">
+ <header class="top"><div class="brand"><div class="mark">🐈</div><div><div class="eyebrow">GUANGZHOU · AFTER-WORK SURVIVAL</div><h1>六点必须走 <span>/ 猫在等我</span></h1></div></div><div class="toptag"><span class="build">● SIDEWALK CHAOS · V0.6</span><button class="btn langbtn" id="langSwitch" type="button" aria-label="Switch language to Chinese" title="Switch language">中文 / EN</button><button class="btn" id="restart">↻ 重开今天</button></div></header>
+ <section class="hud" aria-label="实时状态">
+  <div class="metric"><div class="mhead"><span>🕕 广州当地 · 游戏时钟</span><span id="paceTag">下班了！</span></div><div class="value" id="clockValue">18:00</div><div class="meter"><div class="fill" id="dayFill" style="width:0%;background:#ffd18a"></div></div></div>
+  <div class="metric"><div class="mhead"><span>🐾 猫拆家进度</span><span id="catTag">尚可控</span></div><div class="value" id="catValue">0%</div><div class="meter"><div class="fill" id="catFill" style="width:0%;background:linear-gradient(90deg,#eaba7f,#ff847b)"></div></div></div>
+  <div class="metric"><div class="mhead"><span>⚡ 社畜体力</span><span id="sprintTag">可冲刺</span></div><div class="value" id="energyValue">100 / 100</div><div class="meter"><div class="fill" id="energyFill" style="background:#a7dc9f;width:100%"></div></div></div>
+  <div class="metric"><div class="mhead"><span>🏠 距离到家</span><span id="cashTag">💰 28元</span></div><div class="value sm" id="distValue">5.3 km</div><div class="meter"><div class="fill" id="distFill" style="width:0%;background:#abd7b6"></div></div></div>
+ </section>
+ <div class="playarea"><div class="leftcol">
+  <section class="stage" id="stage" aria-label="实时通勤街道游戏"><canvas id="street" width="960" height="540" aria-label="可通过方向键操纵人物的广州街景"></canvas><div class="stags"><span class="chip" id="areaChip">📍 珠江新城 · CBD</span><span class="chip" id="weatherChip">🌇 黄昏 · 能见度良好</span> <span class="chip threat" id="threatChip">🚶 人行道 · 注意来车</span><span class="chip combo" id="comboChip">⚡ 险闪连击 0</span></div><div class="big-moment" id="bigMoment" aria-live="polite"></div><div class="prompt"><span class="mission" id="mission">⚠️ 人行道不是安全区。注意身后的电鸡！</span><span class="interact" id="interactHint"></span></div><div class="overlay show" id="overlay" role="dialog" aria-modal="true"><div class="modal"><button class="btn overlay-lang" id="langSwitchModal" type="button" aria-label="Switch language">EN / 中文</button><div class="catface" id="modalIcon">🐈</div><div class="mini" id="modalSub">18:00 · CLOCK OUT</div><h2 id="modalTitle">猫在等我，马上到家！</h2><p id="modalText">五段广州街头，自己控制小人向右回家。别被电动车撞飞，路过近道和肠粉摊可按 E 选择。你每多磨蹭一秒，猫就离花盆更近一点。</p><div class="mode-setup" id="modeSetup"><div class="mode-row"><button class="mode-btn active" type="button" data-mode="random" id="modeRandom">🎲 RANDOM</button><button class="mode-btn" type="button" data-mode="daily" id="modeDaily">📆 DAILY</button><button class="mode-btn" type="button" data-mode="custom" id="modeCustom">🤝 CHALLENGE</button></div><div class="mode-hint" id="modeHint">Different streets, different chaos every run.</div><div class="seed-entry" id="seedEntry" hidden><input id="seedInput" maxlength="10" placeholder="CAT-ABC123" aria-label="Challenge code"><small>CAT-XXXXXX</small></div></div><button class="primary" id="modalButton">打卡下班！→</button><div class="grid" id="resultGrid"><div><b>WASD</b>移动</div><div><b>SHIFT</b>冲刺</div><div><b>E / Q</b>交互 / 喊猫</div></div><div class="run-record" id="runRecord" hidden></div><div id="rewardRow" class="rewardrow" hidden></div><button class="primary share-main" id="openShare" hidden>📸 生成结局战报 · 分享翻车现场</button><p class="small" id="modalFoot">键盘 WASD / 方向键 · Shift / 空格冲刺 · P 暂停 · 手机触屏操作</p></div></div></section>
+  <div class="routepanel"><div class="section"><strong>◇ 今天的逃离路线</strong><span class="hint" id="routeCaption">5个街区 · 每天重新洗牌</span></div><div id="route" class="route"></div></div>
+  <div class="chaos-panel"><div class="chaos-head"><span id="chaosTitle">🎲 TODAY'S CHAOS RULES</span><span class="chaos-seed" id="seedBadge">CAT-000000</span></div><div class="chaos-body" id="chaosBody"></div><div class="chaos-goal" id="goalText"></div></div><div class="guide"><span><span class="key">W A S D</span> 移动</span><span><span class="key">SHIFT / SPACE</span> 冲刺</span><span><span class="key">E</span> 交互</span><span><span class="key">Q</span> 远程喊猫</span><span><span class="key">P</span> 暂停</span><span class="legend">人行道也有电鸡！观察前后方，别被逼上车道。</span></div>
+  <div class="mobile"><div class="dpad"><button class="touch up" data-key="up">▲</button><button class="touch down" data-key="down">▼</button><button class="touch leftbtn" data-key="left">◀</button><button class="touch rightbtn" data-key="right">▶</button></div><div class="touchactions"><button class="touch" data-key="sprint">⚡<br>冲刺</button><button class="touch" data-key="interact">✋<br>交互</button><button class="touch" data-key="cat">🐾<br>喊猫</button></div></div>
+ </div><aside class="rightcol">
+  <div class="catpanel" id="catpanel"><div class="cattop"><span class="live">● LIVE · 家庭监控</span><span style="color:#cdd2bb;font-size:10px">CAM-01 / 720P</span></div><div class="catmood" id="catMood">橘座：正在观察桌上的玻璃杯</div><canvas class="catcanvas" id="catcam" width="320" height="200" aria-label="橘猫实时拆家监控画面"></canvas><div class="catnarr" id="catNarr">它什么都没做，但你就是不安心。</div><div class="sideactions"><button class="action" id="catButton">📢 远程喊猫（Q）<em>暂停拆家 8 秒 · 每局一次</em></button><button class="action" id="pauseButton">⏸ 暂停（P）<em>现实世界不会，但游戏可以</em></button></div></div>
+  <div class="gearbox"><div class="section"><strong>🎒 今日通勤装备</strong><span class="hint">及时更新</span></div><div class="gear" id="gear"><span class="tag">🎒 打工人的背包</span></div><div class="section" style="margin:9px 0"><strong>📣 事发播报</strong><span class="hint" id="hitTag">事故 0 次</span></div><div class="log" id="log" aria-live="polite">18:00 打卡成功。你回头看了一眼公司，它像什么也没发生。</div></div>
+ </aside></div><footer class="footer"><span>独立 HTML · 离线可玩 · v0.6 随机人生事件 + 连闪构筑 + 结局图分享</span><span>F5 重载 · R 重开 · 5 段随机顺序</span></footer>
+</div><div class="toast" id="toast" aria-live="polite"></div>
+<div class="event-layer" id="eventLayer" hidden role="dialog" aria-modal="true" aria-labelledby="eventTitle">
+ <div class="event-card"><button class="btn overlay-lang" id="langSwitchEvent" type="button" aria-label="Switch language">EN / 中文</button><span class="event-label">⚠️ 下班路上 · 随机人生事件</span><div id="eventIcon" class="event-icon">📱</div><h2 id="eventTitle"></h2><p id="eventDesc"></p><div class="event-actions"><button id="eventChoice0" class="event-choice"></button><button id="eventChoice1" class="event-choice"></button></div><small>按 1 / 2 选择。做决定时游戏计时暂停。</small></div>
+</div>
+<div class="share-layer" id="shareLayer" hidden role="dialog" aria-modal="true" aria-label="结局战报分享">
+ <div class="share-panel"><div class="share-head"><div><span class="event-label">AFTER-WORK REPORT · V0.6</span><h2>你的今日下班战报 📸</h2></div><div class="share-topcontrols"><button class="btn overlay-lang" id="langSwitchShare" type="button" aria-label="Switch language">EN / 中文</button><button id="closeShare" class="btn" aria-label="关闭分享">✕ 关闭</button></div></div>
+ <div class="share-layout"><div class="poster-wrap"><img id="posterPreview" alt="游戏结局的竖版战报图片预览"><span>1080 × 1350 · PNG · 适合社交平台晒图</span></div>
+ <div class="share-ctrl"><p id="shareCaptionPreview" class="share-caption"></p>
+ <div class="highlight-tag" id="highlightTag">🎬 THE MOMENT</div><div class="challenge-btns"><button id="copyCode" type="button">📋 COPY RUN CODE</button><button id="replayCode" type="button">↻ REMATCH SEED</button></div><button class="sharebtn gold" id="savePoster">⬇ 保存高清结局图 PNG</button>
+ <button class="sharebtn" id="nativeShare">📤 系统分享 · 图片＋文字</button>
+ <button class="sharebtn" id="copyCaption">📋 复制战报文案</button>
+ <div class="share-social"><button class="sharebtn" id="shareX">𝕏 发布到 X / Twitter</button><button class="sharebtn" id="shareInstagram">◎ 分享到 Instagram</button><button class="sharebtn" id="shareWhatsApp">◉ WhatsApp</button><button class="sharebtn" id="shareTelegram">✈ Telegram</button></div>
+ <p class="share-note">X 会打开带预填文字的发布页；图片请自行上传。Instagram 网页不支持第三方直接预填帖文，因此先下载图片和复制文案，再打开平台。支持系统分享的手机可直接选择社交 App。所有发布都由你确认。</p>
+ <div class="share-status" id="shareStatus" role="status" aria-live="polite"></div></div></div></div>
+</div>
+<script>
+'use strict';
+const $=id=>document.getElementById(id),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const W=960,H=540,WORLD_END=5260,SEG=1010,START=110;
+const CAN=$('street'),g=CAN.getContext('2d'),CAT=$('catcam'),cg=CAT.getContext('2d');g.imageSmoothingEnabled=false;cg.imageSmoothingEnabled=false;
+const TYPES=[{id:'scooter',name:'电鸡围城',short:'电鸡潮',ico:'🛵',subtitle:'天河路 · 电动车不讲武德',weather:'夕阳 / 车流密集'},{id:'rain',name:'一场广州暴雨',short:'骤雨',ico:'🌧️',subtitle:'客村 · 一分钟从晴天到暴雨',weather:'短时暴雨 / 积水'},{id:'food',name:'深夜肠粉香',short:'肠粉摊',ico:'🥢',subtitle:'城中村 · 难以抵挡的碳水',weather:'油烟 / 暖色路灯'},{id:'metro',name:'地铁口迷宫',short:'地铁口',ico:'🚇',subtitle:'体育西 · 你永远走不完的出口',weather:'拥挤 / 地铁围栏'},{id:'village',name:'最后一公里',short:'握手楼',ico:'🏘️',subtitle:'棠下 · 小巷最后的难关',weather:'灯火 / 窄街'}];
+let runRng=Math.random;
+let game=null,lastFrame=0,anim=0,toastTimeout=0,camX=0,globalTick=0,lastHud=0,particles=[],audioCtx=null,shareCache=null;
+// Bilingual UI. Browser zh* -> Chinese; all other locales -> English. An explicit choice wins.
+let lang=(()=>{try{const saved=localStorage.getItem('gotta_go_lang_v1');if(saved==='en'||saved==='zh')return saved}catch(e){}return /^zh\b/i.test(navigator.language||'')?'zh':'en'})();
+const T=(en,zh)=>lang==='zh'?zh:en;
+const bilingual=v=>v&&typeof v==='object'&&'en'in v? v[lang] : (typeof v==='string'?translate(v):v);
+const translations={
+'18:00 打卡成功。出发！':'18:00. Clocked out. Run!',
+'📱 你在地铁口假装没信号，反而跑得更快了。':'📱 Pretended to lose signal at the metro. Somehow ran faster.',
+'💼 领导说五分钟，猫在家里拆了一整套收纳柜。':'💼 The boss said five minutes. Your cat dismantled a whole cupboard.',
+'🏠 邻居帮忙拦猫 12 秒！这 10 块红包很值。':'🏠 Neighbor cat-sits for 12s! Worth every ¥10.',
+'📢 邻居收到你的语音，猫心虚了 4 秒。':'📢 Your voice note startled the cat into 4 seconds of silence.',
+'🦺 保安叔叔帮你疏通人行道，12 秒内电鸡少了一大半！':'🦺 Security clears the sidewalk. Fewer scooters for 12s!',
+'🥤 小卖部冰水救命！体力 +35。':'🥤 Ice-cold water saves the day! +35 stamina.',
+'🦺 没钱买水，保安叔叔帮你疏通了路。':'🦺 No cash? Security clears a path anyway.',
+'💦 鞋子湿透，速度反而快了！':'💦 Soaked shoes, surprisingly faster feet!',
+'☂️ 捡到雨披，水坑免疫！但橘座多拆了一角沙发。':'☂️ Found a rain poncho. Puddle immunity; cat damaged the sofa.',
+'🚀 决定做好了！继续回家！':'🚀 Decision made! Run home!',
+'🛵 人行道也被电鸡撞！你才是行人啊！':'🛵 A scooter hits you ON THE SIDEWALK. You are the pedestrian!',
+'🛵 电鸡横冲直撞！你被撞得怀疑人生。':'🛵 A reckless scooter hits you. Why is commuting a boss fight?',
+'⚡ 三连极限闪避！肾上腺素爆发：加速 6 秒，猫愣住 3 秒！':'⚡ Triple near-miss! Adrenaline rush: speed +6s, cat stunned 3s!',
+'⚡ 三连闪！加速 +6 秒 · 猫拆家暂停 3 秒':'⚡ TRIPLE DODGE! Speed +6s · Cat paused 3s',
+'🚕 机动车道不是逃生通道！前方有车快速驶来！':'🚕 The road is NOT an escape route! Fast car approaching!',
+'📣 背后滴滴！电鸡在你身后占着人行道追上来了！':'📣 BEEP BEEP! A scooter is chasing you on the sidewalk!',
+'⚠️ 前方电鸡逆行上人行道！快找空隙躲开！':'⚠️ Wrong-way scooter on the sidewalk! Find a gap!',
+'🚕 被迫走机动车道，差点撞上车！这条路更危险！':'🚕 The car lane is even more dangerous. Nearly got hit!',
+'🚶 撞到赶地铁的行人！被瞪了一眼。':'🚶 Bumped into a commuter sprinting for the metro. Got glared at.',
+'📹 监控：橘座试探性碰了一下水杯。':'📹 HOME CAM: Cat gently nudges the glass.',
+'📹 监控：第一盆绿植光荣退役。':'📹 HOME CAM: First houseplant is down.',
+'📹 监控：沙发迎来史上最大挑战。':'📹 HOME CAM: The sofa faces its greatest threat.',
+'🚨 监控：家具进入最终倒计时！':'🚨 HOME CAM: Furniture entering final countdown!',
+'远程喊猫已经用过了，它现在无视你。':'Your one cat-call is used up. You are being ignored.',
+'📢 你远程喊了一声「咪咪！」，监控里突然安静了 8 秒。':'📢 You yell KITTY! through the camera. Eight seconds of silence.',
+'🐈 喊猫成功！猫拆家暂停 8 秒。':'🐈 Cat distracted! Damage paused for 8s.',
+'附近没什么可以互动的，还是回家要紧。':'Nothing nearby to interact with. Get home!',
+'近路施工！猫趁机推倒了相框':'Shortcut under construction! Cat knocks over a frame.',
+'抄近路成功！':'Shortcut taken!',
+'🧱 巷子里居然在施工，虽然穿过去了，却花了点时间。':'🧱 Construction in the alley! You got through, but lost time.',
+'🏃 穿过握手楼的小巷，省下了一大段路！':'🏃 Slipped through a narrow alley and saved a lot of time!',
+'⚠️ 小巷施工！惊险穿过，猫拆家 +8%':'⚠️ Alley construction! Cat damage +8%',
+'🥢 啪，一份肠粉下肚，体力回来了。但猫偷偷把水杯移到了桌沿。':'🥢 Rice rolls restored stamina. Meanwhile, your cat edges the glass closer.',
+'🥢 肠粉：-12 元，体力 +50，猫拆家 +7%':'🥢 Rice rolls: -¥12, +50 stamina, cat +7%',
+'☂️ 便利店抢到一把伞！穿过水坑不再减速。':'☂️ Got an umbrella! Puddles no longer slow you.',
+'☂️ 买到折叠伞！雨天水坑免疫，-8 元':'☂️ Umbrella: puddle immunity, -¥8',
+'地上积水，穿过去可能减速。':'Puddles may slow you down.',
+'电动车从右侧迎面袭来。':'Scooters heading straight at you.',
+'路边有惊喜，也可能有麻烦。':'Street surprises. Some are not good.',
+'险！':'CLOSE!',
+'肠粉':'RICE ROLLS','便利店':'MART','糖水':'DESSERT','地铁口':'METRO','珠江夜话':'PEARL RIVER','落班啦':'OFF WORK','手机维修':'REPAIRS','烧腊':'ROAST MEAT','快递站':'COURIER',
+'肠 粉':'RICE ROLLS','已走过':'USED','近路 →':'SHORTCUT →','售罄':'SOLD OUT','雨伞':'UMBRELLA','我 的 家':'HOME','咪?':'MEOW?',
+'电鸡围城':'SCOOTER SIEGE','电鸡潮':'SCOOTERS','天河路 · 电动车不讲武德':'Tianhe Rd · Scooter chaos','夕阳 / 车流密集':'Sunset / Heavy traffic',
+'一场广州暴雨':'SUDDEN DOWNPOUR','骤雨':'DOWNPOUR','客村 · 一分钟从晴天到暴雨':'Kecun · Instant downpour','短时暴雨 / 积水':'Storm / Puddles',
+'深夜肠粉香':'RICE ROLL TEMPTATION','肠粉摊':'RICE ROLLS','城中村 · 难以抵挡的碳水':'Urban village · Midnight carbs','油烟 / 暖色路灯':'Street food / Warm lights',
+'地铁口迷宫':'METRO MAZE','体育西 · 你永远走不完的出口':'Tiyu Xilu · Endless exits','拥挤 / 地铁围栏':'Crowds / Railings',
+'最后一公里':'LAST MILE','握手楼':'NARROW ALLEYS','棠下 · 小巷最后的难关':'Tangxia · Final alley gauntlet','灯火 / 窄街':'Night lights / Narrow alleys'
+};
+function translate(v){return lang==='zh'?v:(translations[v]??v)}
+const ui={
+'brand':['GOTTA GO BY SIX <span>/ THE CAT IS WAITING</span>','六点必须走 <span>/ 猫在等我</span>'],
+'restart':['↻ RESTART DAY','↻ 重开今天'],
+'clockLabel':['🕕 GUANGZHOU · GAME CLOCK','🕕 广州当地 · 游戏时钟'],
+'catLabel':['🐾 CAT DAMAGE','🐾 猫拆家进度'],
+'staminaLabel':['⚡ STAMINA','⚡ 社畜体力'],
+'distanceLabel':['🏠 DISTANCE HOME','🏠 距离到家'],
+'routeTitle':['◇ THE ROAD HOME','◇ 今天的逃离路线'],
+'guideMove':['Move','移动'],
+'guideSprint':['Sprint','冲刺'],
+'guideInteract':['Interact','交互'],
+'guideCall':['Call cat','远程喊猫'],
+'guidePause':['Pause','暂停'],
+'guideHint':['Scooters ride on sidewalks too. Watch your back!','人行道也有电鸡！观察前后方，别被逼上车道。'],
+'catLive':['● LIVE · HOME CAM','● LIVE · 家庭监控'],
+'catButton':['📢 CALL CAT (Q) <em>Stop damage for 8s · Once per run</em>','📢 远程喊猫（Q）<em>暂停拆家 8 秒 · 每局一次</em>'],
+'pauseButton':['⏸ PAUSE (P) <em>Real traffic never waits. This game does.</em>','⏸ 暂停（P）<em>现实世界不会，但游戏可以</em>'],
+'gearTitle':['🎒 COMMUTE GEAR','🎒 今日通勤装备'],
+'gearHint':['Live inventory','及时更新'],
+'feedTitle':['📣 STREET FEED','📣 事发播报'],
+'foot1':['Standalone HTML · Offline · v0.6 Random encounters + Dodge combos + Shareable endings','独立 HTML · 离线可玩 · v0.6 随机人生事件 + 连闪构筑 + 结局图分享'],
+'foot2':['F5 refresh · R restart · 5 shuffled districts','F5 重载 · R 重开 · 5 段随机顺序'],
+'eventLabel':['⚠️ COMMUTE ENCOUNTER','⚠️ 下班路上 · 随机人生事件'],
+'eventHelp':['Press 1 / 2 to choose. Game time freezes here.','按 1 / 2 选择。做决定时游戏计时暂停。'],
+'shareTitle':['YOUR COMMUTE REPORT 📸','你的今日下班战报 📸'],
+'closeShare':['✕ CLOSE','✕ 关闭'],
+'posterHint':['1080 × 1350 · PNG · Ready for socials','1080 × 1350 · PNG · 适合社交平台晒图'],
+'savePoster':['⬇ SAVE HIGH-RES PNG','⬇ 保存高清结局图 PNG'],
+'nativeShare':['📤 SHARE IMAGE + TEXT','📤 系统分享 · 图片＋文字'],
+'copyCaption':['📋 COPY CAPTION','📋 复制战报文案'],
+'shareX':['𝕏 POST TO X / TWITTER','𝕏 发布到 X / Twitter'],
+'shareInstagram':['◎ INSTAGRAM','◎ 分享到 Instagram'],
+'shareNote':['X pre-fills text only; upload the image yourself. Instagram does not support third-party web post prefill: save the image and paste the caption there. On supported devices, use native share for both. You always confirm before posting.','X 会打开带预填文字的发布页；图片请自行上传。Instagram 网页不支持第三方直接预填帖文，因此先下载图片和复制文案，再打开平台。支持系统分享的手机可直接选择社交 App。所有发布都由你确认。'],
+'mobileSprint':['⚡<br>SPRINT','⚡<br>冲刺'],
+'mobileInteract':['✋<br>ACT','✋<br>交互'],
+'mobileCat':['🐾<br>CALL','🐾<br>喊猫']
+};
+const staticSelectors={brand:'.brand h1',restart:'#restart',clockLabel:'.hud .metric:nth-child(1) .mhead span:first-child',catLabel:'.hud .metric:nth-child(2) .mhead span:first-child',staminaLabel:'.hud .metric:nth-child(3) .mhead span:first-child',distanceLabel:'.hud .metric:nth-child(4) .mhead span:first-child',routeTitle:'.routepanel .section strong',guideMove:'.guide span:nth-child(1)',guideSprint:'.guide span:nth-child(2)',guideInteract:'.guide span:nth-child(3)',guideCall:'.guide span:nth-child(4)',guidePause:'.guide span:nth-child(5)',guideHint:'.guide .legend',catLive:'.catpanel .live',catButton:'#catButton',pauseButton:'#pauseButton',gearTitle:'.gearbox .section:nth-child(1) strong',gearHint:'.gearbox .section:nth-child(1) .hint',feedTitle:'.gearbox .section:nth-child(3) strong',foot1:'.footer span:nth-child(1)',foot2:'.footer span:nth-child(2)',eventLabel:'.event-layer .event-label',eventHelp:'.event-layer .event-card small',shareTitle:'.share-head h2',closeShare:'#closeShare',posterHint:'.poster-wrap span',savePoster:'#savePoster',nativeShare:'#nativeShare',copyCaption:'#copyCaption',shareX:'#shareX',shareInstagram:'#shareInstagram',shareNote:'.share-note',mobileSprint:'.touchactions [data-key="sprint"]',mobileInteract:'.touchactions [data-key="interact"]',mobileCat:'.touchactions [data-key="cat"]'};
+function intro(){if(!game)return;$('modeSetup').hidden=false;$('modalIcon').textContent='🐈';$('modalSub').textContent='18:00 · CLOCK OUT';$('modalTitle').textContent=T('YOUR CAT IS WAITING!','猫在等我，马上到家！');$('modalText').textContent=T('Think the sidewalk is safe? Think again. Wrong-way scooters, honking behind you, parked bikes on tactile paving. Cross five Guangzhou neighborhoods, grab street loot and complete bonus challenges. WASD to dodge, Shift to sprint, E for shortcuts, Q to distract the cat.','你以为人行道最安全？错！电鸡逆行、身后喇叭、盲道停满车。穿越五个广州街区，捡路边道具、完成额外挑战。WASD闪避，Shift冲刺，E抄捷径，Q远程喊猫。');$('resultGrid').innerHTML=T('<div><b>WASD</b>MOVE</div><div><b>SHIFT</b>SPRINT</div><div><b>E / Q</b>ACT / CAT</div>','<div><b>WASD</b>移动</div><div><b>SHIFT</b>冲刺</div><div><b>E / Q</b>交互 / 喊猫</div>');$('modalButton').textContent=T('CLOCK OUT & RUN →','打卡下班！→');$('modalFoot').textContent=T('Arrow keys also work · Space to sprint · P to pause · Touch controls available','方向键也可移动 · 空格冲刺 · P 暂停 · 支持手机触屏');}
+function pauseIntro(){$('modeSetup').hidden=true;showOverlay('⏸',T('PAUSED','PAUSED · 游戏已暂停'),T('A BREATHER FOR YOU AND THE CAT','喘口气，橘座也暂停了'),T('Real scooters will not wait for you. Fortunately this one will.','现实世界的电动车不会等你，但这个游戏会。'),T('KEEP RUNNING →','继续跑！→'),T('Press P to resume','按 P 也可继续'));}
+function resultIntro(){$('modeSetup').hidden=true;const s=game;if(!s)return;const won=s.phase==='win',intg=Math.max(0,100-Math.floor(s.cat));calcResult(s);showOverlay(won?'🏠':'💥',won?T('MISSION COMPLETE','MISSION COMPLETE · 下班生还'):T('MISSION FAILED','MISSION FAILED · 猫的胜利'),(won?'🏠 ':'💥 ')+s.rank,T(s.ending+(won?' · You made it home!':' · The cat now runs a demolition company!'),s.ending+' · '+(won?'你成功推门回家！':'橘座承包了家装业务！')),won?T('ESCAPE ANOTHER DAY ↻','再逃离一天 ↻'):T('TRY AGAIN TOMORROW ↻','明天一定准时 ↻'),won?T('Sometimes the commute IS the boss fight.','有时候，下班本身就是一场 Boss 战。'):T('Bad ending: your house died, not you.','坏结局不是人没了，是家没了。'));$('resultGrid').innerHTML=`<div><b>${s.score}</b>${T('SCORE','本局战力分')}</div><div><b>${intg}%</b>${T('FURNITURE','家具幸存')}</div><div><b>${s.hits}</b>${T('COLLISIONS','交通事故')}</div>`;$('rewardRow').innerHTML=s.achievement.map(x=>`<span class="award">${x}</span>`).join('');$('rewardRow').hidden=false;$('runRecord').hidden=false;$('runRecord').textContent=T('🎲 '+seedCode(s.seed)+' · '+s.city.en+' + '+s.catRule.en,'🎲 '+seedCode(s.seed)+' · '+s.city.zh+' + '+s.catRule.zh)+(s.personalBest?T(' · BEST '+s.personalBest,' · 最佳 '+s.personalBest):'');$('openShare').hidden=false;$('openShare').textContent=T('📸 VIEW & SHARE YOUR ENDING','📸 生成结局战报 · 分享翻车现场');}
+function applyLocale(){document.documentElement.lang=lang==='zh'?'zh-CN':'en';document.title=T('Gotta Go by Six · The Cat Is Waiting | v0.6','六点必须走 · 猫在等我 | v0.6');renderModeControls();document.querySelector('meta[name="description"]')?.setAttribute('content',T('A Guangzhou commute survival game. Dodge sidewalk scooters and get home before your cat destroys everything.','广州人行道电鸡生存游戏。赶在橘猫拆完家之前回家。'));Object.entries(staticSelectors).forEach(([key,sel])=>{const el=document.querySelector(sel);if(!el)return;let value=ui[key][lang==='zh'?1:0];if(key.startsWith('guide')&&key!=='guideHint'){const keyText=el.querySelector('.key')?.outerHTML||'';el.innerHTML=keyText+' '+value;}else el.innerHTML=value;});document.querySelectorAll('#langSwitch,#langSwitchEvent,#langSwitchShare,#langSwitchModal').forEach(x=>x.textContent=lang==='en'?'中文':'ENGLISH');$('langSwitch').setAttribute('aria-label',lang==='en'?'Switch to Chinese':'切换到英文');$('langSwitch').title=lang==='en'?'Switch to Chinese':'切换到英文';$('openShare').textContent=T('📸 VIEW & SHARE YOUR ENDING','📸 生成结局战报 · 分享翻车现场');if(game){if(game.phase==='menu')intro();else if(game.phase==='pause')pauseIntro();else if(game.phase==='win'||game.phase==='lose')resultIntro();if(game.phase==='event')paintEvent();$('log').textContent=bilingual(game.log);updateHud();if(!$('shareLayer').hidden)setShareStatus(T('Your poster and caption are ready. Save or share below.','图片与战报已准备好，可以保存或分享。'));if(game.phase==='win'||game.phase==='lose'){try{drawScene(globalTick);drawCat(globalTick);shareCache=buildPoster(game);$('posterPreview').src=shareCache.url;$('shareCaptionPreview').textContent=shareCache.caption;$('highlightTag').textContent='🎬 '+bestMoment(game)[lang];$('copyCode').textContent=publicChallengeUrl()?T('🔗 COPY CHALLENGE LINK','🔗 复制挑战链接'):T('📋 COPY RUN CODE','📋 复制挑战码');}catch(e){console.warn(e)}}}}
+function setLocale(v){if(v===lang)return;lang=v;try{localStorage.setItem('gotta_go_lang_v1',v)}catch(e){}applyLocale();}
+['langSwitch','langSwitchEvent','langSwitchShare','langSwitchModal'].forEach(id=>$(id).addEventListener('click',()=>setLocale(lang==='en'?'zh':'en')));
+
+function honk(){try{if(!audioCtx){const C=window.AudioContext||window.webkitAudioContext;if(!C)return;audioCtx=new C()}if(audioCtx.state==='suspended')audioCtx.resume();const t=audioCtx.currentTime,o=audioCtx.createOscillator(),gain=audioCtx.createGain();o.type='square';o.frequency.setValueAtTime(410,t);o.frequency.setValueAtTime(380,t+.08);gain.gain.setValueAtTime(.045,t);gain.gain.exponentialRampToValueAtTime(.001,t+.19);o.connect(gain);gain.connect(audioCtx.destination);o.start(t);o.stop(t+.2)}catch(e){/* 音效不可用时保留完整游戏体验 */}}
+const keys={left:false,right:false,up:false,down:false,sprint:false};
+const randint=(a,b)=>Math.floor(runRng()*(b-a+1))+a;
+const choice=a=>a[Math.floor(runRng()*a.length)];
+const rnd=(a,b)=>a+(b-a)*runRng();
+const orderShuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=randint(0,i);[a[j],a[i]]=[a[i],a[j]]}return a};
+const mod=(a,b)=>((a%b)+b)%b;
+const timeText=min=>`${String(Math.floor(min/60)).padStart(2,'0')}:${String(Math.floor(min%60)).padStart(2,'0')}`;
+function msg(text){const el=$('toast');el.textContent=bilingual(text);el.classList.add('show');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>el.classList.remove('show'),2300)}
+function record(text){if(!game)return;game.log=text;$('log').textContent=bilingual(text);}
+
+// Repeatable layouts. Daily challenge uses a UTC date, so the same date worldwide means the same map.
+let runMode='random',runOverrideSeed=null;
+const CITY_RULES=[
+ {id:'rush',icon:'🛵',en:'RUSH HOUR',zh:'电鸡早高峰',infoEn:'More scooters · dodge restores extra stamina',infoZh:'电鸡更多 · 险闪恢复更多体力'},
+ {id:'rain',icon:'🌧️',en:'WET SHOES',zh:'暴雨湿鞋',infoEn:'Puddles are slower · more street loot',infoZh:'水坑更滑 · 路边补给增加'},
+ {id:'express',icon:'🏃',en:'FAST FEET',zh:'跑腿冠军',infoEn:'Move 16% faster · stamina drains quicker',infoZh:'速度 +16% · 冲刺耗体力更快'},
+ {id:'detour',icon:'🚧',en:'DETOUR LOTTERY',zh:'城中村捷径赌局',infoEn:'Longer shortcuts · more construction',infoZh:'捷径更长 · 更容易撞上施工'}
+];
+const CAT_RULES=[
+ {id:'zoomies',icon:'🐈',en:'3 A.M. ZOOMIES',zh:'橘猫暴走',infoEn:'Cat destroys faster · cat-call lasts longer',infoZh:'猫拆得更快 · 喊猫更有效'},
+ {id:'nap',icon:'😴',en:'SLEEPY CAT',zh:'瞌睡橘座',infoEn:'Cat slower · street items less common',infoZh:'猫拆得更慢 · 路边补给更少'},
+ {id:'gremlin',icon:'📺',en:'TINY DEMOLITION CREW',zh:'拆家施工队',infoEn:'Cat knocks extra things down · more treats',infoZh:'猫会额外破坏 · 更多零食救援'}
+];
+const GOALS=[
+ {id:'dodge',icon:'⚡',target:3,en:'Dodge 3 scooters',zh:'极限闪避 3 次'},
+ {id:'loot',icon:'🎁',target:3,en:'Grab 3 pickups',zh:'拾取 3 个补给'},
+ {id:'shortcut',icon:'🧱',target:2,en:'Take 2 shortcuts',zh:'抄 2 次近路'},
+ {id:'clean',icon:'🛡️',target:1,en:'Get home with no hits',zh:'零事故回家'},
+ {id:'silent',icon:'🐈',target:1,en:'Get home without calling your cat',zh:'不喊猫也能到家'}
+];
+function seededRng(seed){let a=(seed>>>0)||1;return ()=>{a+=0x6D2B79F5;let t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return ((t^(t>>>14))>>>0)/4294967296;}}
+function utcDailySeed(){const d=new Date().toISOString().slice(0,10);let n=2166136261;for(const c of 'GOTTA06-'+d)n=Math.imul(n^c.charCodeAt(0),16777619);return n>>>0}
+function parseCode(v){const m=/^(?:CAT-)?([0-9A-Fa-f]{6})$/.exec((v||'').trim().toUpperCase());return m?parseInt(m[1],16):null}
+function seedCode(seed){return 'CAT-'+((seed>>>0)&0xFFFFFF).toString(16).toUpperCase().padStart(6,'0')}
+function runSeed(){if(runOverrideSeed!=null){const n=runOverrideSeed;runOverrideSeed=null;return n;}if(runMode==='daily')return utcDailySeed()&0xFFFFFF;if(runMode==='custom')return parseCode($('seedInput').value)??randomSeed();return randomSeed()}
+function randomSeed(){try{if(crypto?.getRandomValues){const a=new Uint32Array(1);crypto.getRandomValues(a);return a[0]&0xFFFFFF}}catch(e){}return (Math.floor(Math.random()*0xFFFFFF))>>>0}
+function setRunMode(m){runMode=m;runOverrideSeed=null;if(game?.phase==='menu'){if(m!=='custom')reset();else{game.mode=m;renderModeControls();}}else{reset()}}
+function renderModeControls(){const labels={random:T('🎲 RANDOM','🎲 随机'),daily:T('📆 DAILY','📆 每日'),custom:T('🤝 CHALLENGE','🤝 挑战码')};for(const b of document.querySelectorAll('.mode-btn')){b.classList.toggle('active',b.dataset.mode===runMode);b.textContent=labels[b.dataset.mode];}$('seedEntry').hidden=runMode!=='custom';$('modeHint').textContent=runMode==='daily'?T('Same street layout and chaos rules for everyone, refreshed 00:00 UTC. Live traffic depends on play.','全球同一天共用地图与随机规则，UTC 0 点更新。动态车流随操作变化。'):runMode==='custom'?T('Paste a CAT-XXXXXX code to try a friend’s map.','输入朋友的 CAT-XXXXXX 挑战码，复刻相同地图。'):T('Fresh roads, one ridiculous cat, and a new set of twists.','每局不同的道路、随机规则和荒诞猫灾。');}
+function questProgress(s){switch(s.goal.id){case 'dodge':return s.nearMisses;case 'loot':return s.lootTaken;case 'shortcut':return s.shortcuts;case 'clean':return s.phase==='win'&&s.hits===0?1:0;case 'silent':return s.phase==='win'&&!s.catUsed?1:0;default:return 0}}
+function checkQuest(){const s=game;if(!s||s.questDone)return;const done=questProgress(s)>=s.goal.target;if(done){s.questDone=true;s.questBonus=250;if(s.phase==='play'){s.pausedCat+=6;bigMoment('🎯',T('SIDE QUEST CLEAR! CAT FROZEN +6s','支线挑战完成！猫暂停 6 秒'),2);addMoment({en:'Completed a side quest mid-commute!',zh:'通勤途中顺手完成了一项支线任务！',weight:4,icon:'🏅'});}else addMoment({en:'Completed the bonus challenge!',zh:'额外挑战也拿下了！',weight:4,icon:'🏅'});}}
+function addMoment(m){const s=game;if(!s)return;s.moments.push(m);if(s.moments.length>20)s.moments.shift();}
+function bestMoment(s){return [...s.moments].sort((a,b)=>b.weight-a.weight)[0]||{en:'The cat was home alone. That was your first mistake.',zh:'把猫单独留在家里，就是第一步错误。',icon:'🐈',weight:0};}
+let momentTimer=0;
+function bigMoment(icon,text,duration=1.5){const e=$('bigMoment');e.innerHTML='<small>'+T('THE COMMUTE INCIDENT','今日通勤事故')+'</small>'+icon+' '+text;e.classList.add('show');clearTimeout(momentTimer);momentTimer=setTimeout(()=>e.classList.remove('show'),duration*1000);}
+function pickupName(t){return ({energy:T('ENERGY','体力'),treat:T('CAT TREAT','猫零食'),boost:T('TURBO','疾走'),lucky:T('BONUS','积分')})[t]}
+function collectPickup(o){const s=game;if(o.used)return;o.used=true;s.lootTaken++;let label='';
+ if(o.kind==='energy'){s.player.energy=clamp(s.player.energy+40,0,100);label=T('COFFEE! +40 STAMINA','咖啡！体力 +40')}
+ else if(o.kind==='treat'){s.pausedCat+=8;label=T('CAT TREAT! CAT STUNNED 8s','猫条！橘座暂停 8 秒')}
+ else if(o.kind==='boost'){s.dashTime=Math.max(s.dashTime,6);label=T('TURBO! 6s SPEED','喷射鞋！疾走 6 秒')}
+ else {s.bonusScore+=125;label=T('LUCKY FIND! +125 POINTS','路边捡漏！得分 +125')}
+ addMoment({en:'Found '+({energy:'life-saving coffee',treat:'a cat treat',boost:'turbo shoes',lucky:'an unexpected bonus'})[o.kind]+' on the street!',zh:'通勤路上捡到了'+({energy:'续命咖啡',treat:'救命猫条',boost:'疾走跑鞋',lucky:'意外积分'})[o.kind]+'！',icon:'🎁',weight:2});bigMoment('🎁',label,1.1);record({en:'🎁 '+label,zh:'🎁 '+label});checkQuest();}
+
+function makeRun(){const seed=runSeed();runRng=seededRng(seed);const route=orderShuffle(TYPES),objects=[],staticDecor=[];
+ const city=choice(CITY_RULES),catRule=choice(CAT_RULES),goal=choice(GOALS);
+ const s={route,objects,staticDecor,seed,mode:runMode,city,catRule,goal,questDone:false,questBonus:0,lootTaken:0,bonusScore:0,moments:[],catBurst:0,catBurstNext:13,player:{x:START,y:290,energy:100,vx:0,vy:0,invuln:0,stun:0},phase:'menu',plotEvents:orderShuffle(['boss','neighbor','guardian','rainbonus']).slice(0,2),plotIndex:0,plotNextX:1500,plotChoice:[],dashTime:0,guardTime:0,dodgeChain:0,dodgeBest:0,dodgeWindow:0,score:0,achievement:[],time:18*60,elapsed:0,cat:0,money:28,hits:0,pausedCat:0,catUsed:false,umbrella:false,shoes:false,foodUsed:false,doors:0,shortcuts:0,stalls:0,sideHits:0,nearMisses:0,warningCooldown:0,threat:null,log:'18:00 打卡成功。出发！',lastArea:-1,events:[],scooters:[],cars:[],carTimer:1.8,peds:[],debris:[],spawnTimer:.5,catMilestone:0,toastCooldown:0,hint:'',nearest:null,slow:0,footstep:0,frame:0,night:0};
+ for(let i=0;i<route.length;i++){const kind=route[i].id,start=230+i*SEG;
+   if(kind==='rain')for(let k=0;k<10;k++)objects.push({type:'puddle',x:start+randint(80,930),y:choice([278,299,464,492,348]),w:randint(47,85),h:randint(23,37)});
+   if(kind==='scooter')for(let k=0;k<5;k++)objects.push({type:'cone',x:start+85+k*170,y:choice([287,305,453]),w:31,h:30});
+   // 广州街头：乱停的电鸡侵占盲道，形成缝隙通行与绕路抉择
+   const parkingCount=kind==='scooter'?6:kind==='metro'?5:kind==='village'?4:3;
+   for(let k=0;k<parkingCount;k++){const y=k%3===0?306:k%3===1?278:492;objects.push({type:'parked',x:start+115+k*(780/parkingCount)+randint(-22,22),y,w:randint(67,87),h:25,color:choice(['#cf7258','#7da09b','#d2a776','#8593ad']),phase:rnd(0,6)});}
+   if(kind==='metro')for(let k=0;k<4;k++)objects.push({type:'barrier',x:start+220+k*155,y:choice([279,461,490]),w:74,h:32});
+   if(kind==='village')for(let k=0;k<5;k++)objects.push({type:'crate',x:start+110+k*170,y:choice([280,309,467,498]),w:50,h:34});
+   if(kind==='food'){objects.push({type:'stall',x:start+480,y:273,w:100,h:38,used:false});for(let k=0;k<3;k++)objects.push({type:'crate',x:start+190+k*240,y:choice([460,490]),w:50,h:32})}
+   if(kind==='metro'||kind==='village'||kind==='scooter')objects.push({type:'shortcut',x:start+420,y:481,w:76,h:50,used:false,skip:230+randint(0,80),kind});
+   if(kind==='rain')objects.push({type:'umbrella',x:start+440,y:285,w:55,h:30,used:false});
+ }
+ for(let i=0;i<35;i++){const x=250+i*143+randint(-50,50);s.peds.push({x,y:choice([277,297,457,482,507]),origin:x,originY:choice([282,296,458,481]),phase:rnd(0,6),color:choice(['#486875','#7b5b68','#5a725b','#a56c50','#b9a574']),speed:rnd(.3,.9),hitTimer:0});}
+ // Reproducible street loot. Randomized locations, never hidden inside solid street objects.
+ s.pickups=[];const pickupCount=(city.id==='rain'||catRule.id==='gremlin')?9:catRule.id==='nap'?5:7;
+ for(let n=0;n<pickupCount;n++){
+   const x=490+n*((WORLD_END-880)/pickupCount)+randint(-70,70),y=choice([287,306,465,492]);
+   const blocked=s.objects.some(o=>o.type!=='puddle'&&Math.abs(o.x-x)<100&&Math.abs(o.y-y)<48);
+   let py=y;if(blocked)py=y<350?485:294;
+   s.pickups.push({x,y:py,kind:choice(['energy','treat','boost','lucky']),used:false,phase:rnd(0,6)});
+ }
+ return s;
+}
+function reset(){shareCache=null;$('modeSetup').hidden=false;$('runRecord').hidden=true;$('bigMoment').classList.remove('show');$('openShare').hidden=true;$('rewardRow').hidden=true;$('eventLayer').hidden=true;$('shareLayer').hidden=true;game=makeRun();Object.keys(keys).forEach(k=>keys[k]=false);camX=0;lastHud=0;intro();renderModeControls();$('overlay').classList.add('show');$('pauseButton').disabled=false;updateHud();}
+function makeRunWithSeed(seed){runOverrideSeed=seed;return makeRun()}
+
+function start(){if(!game)reset();if(game.phase==='menu'&&runMode==='custom'){const code=parseCode($('seedInput').value);if(code==null){$('seedInput').focus();msg(T('Enter a valid CAT-XXXXXX code!','请输入有效的 CAT-XXXXXX 挑战码！'));return;}game=makeRunWithSeed(code);}game.phase='play';$('modeSetup').hidden=true;lastFrame=performance.now();$('overlay').classList.remove('show');msg(T('18:00. Clocked out! Watch for scooters ON the sidewalk!','18:00 打卡成功！人行道也会突然冲出电鸡！'));updateHud();}
+function pause(){if(!game)return;if(game.phase==='play'){game.phase='pause';pauseIntro();}else if(game.phase==='pause'){game.phase='play';$('overlay').classList.remove('show');lastFrame=performance.now();}}
+
+function showOverlay(ico,sub,title,desc,btn,foot){$('modalIcon').textContent=ico;$('modalSub').textContent=sub;$('modalTitle').textContent=title;$('modalText').textContent=desc;$('modalButton').textContent=btn;$('modalFoot').textContent=foot;$('overlay').classList.add('show');}
+function finish(won){if(!game||!['play','event'].includes(game.phase))return;game.phase=won?'win':'lose';const s=game;checkQuest();$('eventLayer').hidden=true;resultIntro();try{const key='gotta06_best_'+seedCode(s.seed);const prev=Number(localStorage.getItem(key)||0);s.personalBest=Math.max(prev,s.score);if(s.score>prev)localStorage.setItem(key,String(s.score))}catch(e){s.personalBest=s.score}resultIntro();try{shareCache=buildPoster(s);$('posterPreview').src=shareCache.url;$('shareCaptionPreview').textContent=shareCache.caption;}catch(err){console.error('Poster rendering failed',err);shareCache=null;}try{if(won){const key='gotta_go_realtime_best_v03';const prev=JSON.parse(localStorage.getItem(key)||'null');if(!prev||s.elapsed<prev.elapsed)localStorage.setItem(key,JSON.stringify({elapsed:s.elapsed,integrity:Math.max(0,100-Math.floor(s.cat)),shortcuts:s.shortcuts}));}}catch(e){}updateHud();}
+
+const PLOT={
+ boss:{icon:'📱',title:'领导：「方便聊五分钟吗？」',desc:'你刚逃出公司，手机突然亮了。家里的橘座同时站上了书桌。',choices:['📶「刚进地铁，信号差」\n+5 秒疾走，猫 +3%','💼 接电话领加班费\n+15 元，猫 +12%']},
+ neighbor:{icon:'🏠',title:'邻居：「你家猫好像在拆迁！」',desc:'业主群里出现了橘座的身影。有人可以帮你拦住它，但总得意思意思。',choices:['🧧 请邻居看猫 -10 元\n猫暂停 12 秒','😼 发语音假装镇定\n猫暂停 4 秒，猫 +4%']},
+ guardian:{icon:'🦺',title:'保安：「前面电鸡堵了盲道！」',desc:'路口乱停一排电动车，热心保安叔叔给你指了条路。',choices:['🚧 请求疏导电鸡\n人行道来车变少 12 秒','🥤 买水续命 -6 元\n体力 +35']},
+ rainbonus:{icon:'🌧️',title:'广州式天气预报：随机开水龙头',desc:'刚刚还大晴天，现在像被整个云层泼了一盆水。',choices:['🩴 直接踩水冲过去\n疾走 6 秒，猫 +7%','☂️ 捡路边落下的雨披\n水坑免疫，猫 +10%']}
+};
+const PLOT_EN={
+ boss:{icon:'📱',title:'Boss: "Got five minutes?"',desc:'You just escaped work. Your phone lights up. Your cat climbs onto the desk at the same time.',choices:['📶 "Going into the metro. Bad signal!"\n5s speed boost, cat +3%','💼 Answer for overtime pay\n+¥15, cat +12%']},
+ neighbor:{icon:'🏠',title:'Neighbor: "Your cat is renovating!"',desc:'The building chat has spotted your cat. Someone can stop it, but favors are not free.',choices:['🧧 Ask neighbor to cat-sit: -¥10\nPause cat for 12s','😼 Send a casual voice message\nPause 4s, cat +4%']},
+ guardian:{icon:'🦺',title:'Security: "Scooters blocking the tactile path!"',desc:'Parked scooters block the sidewalk. A security guard offers to help.',choices:['🚧 Ask to clear the sidewalk\nFewer scooters for 12s','🥤 Buy a cold drink: -¥6\n+35 stamina']},
+ rainbonus:{icon:'🌧️',title:'Guangzhou weather: Surprise waterfall',desc:'One minute sunshine. The next, a bucket dumped by the sky.',choices:['🩴 Sprint through the flood\n6s speed boost, cat +7%','☂️ Grab a discarded rain poncho\nPuddle immunity, cat +10%']}
+};
+function paintEvent(){const s=game;if(!s||s.phase!=='event')return;const e=lang==='en'?PLOT_EN[s.plotCurrent]:PLOT[s.plotCurrent];if(!e)return;$('eventIcon').textContent=e.icon;$('eventTitle').textContent=e.title;$('eventDesc').textContent=e.desc;e.choices.forEach((x,i)=>$('eventChoice'+i).textContent=x.replace('\\n','\n'));}
+
+function openPlotEvent(id){if(!game||game.phase!=='play')return;const s=game,e=PLOT[id];if(!e)return;s.phase='event';s.plotCurrent=id;Object.keys(keys).forEach(k=>keys[k]=false);paintEvent();$('eventLayer').hidden=false;updateHud();}
+
+function resolvePlotEvent(i){const s=game;if(!s||s.phase!=='event'||![0,1].includes(i))return;const id=s.plotCurrent;
+ if(id==='boss'){if(i===0){s.dashTime+=5;s.cat+=3;record('📱 你在地铁口假装没信号，反而跑得更快了。')}else{s.money+=15;s.cat+=12;record('💼 领导说五分钟，猫在家里拆了一整套收纳柜。')}}
+ else if(id==='neighbor'){if(i===0&&s.money>=10){s.money-=10;s.pausedCat+=12;record('🏠 邻居帮忙拦猫 12 秒！这 10 块红包很值。')}else{s.pausedCat+=4;s.cat+=4;record('📢 邻居收到你的语音，猫心虚了 4 秒。')}}
+ else if(id==='guardian'){if(i===0){s.guardTime+=12;record('🦺 保安叔叔帮你疏通人行道，12 秒内电鸡少了一大半！')}else if(s.money>=6){s.money-=6;s.player.energy=clamp(s.player.energy+35,0,100);record('🥤 小卖部冰水救命！体力 +35。')}else{record('🦺 没钱买水，保安叔叔帮你疏通了路。');s.guardTime+=8;}}
+ else if(id==='rainbonus'){if(i===0){s.dashTime+=6;s.cat+=7;record('💦 鞋子湿透，速度反而快了！')}else{s.umbrella=true;s.cat+=10;record('☂️ 捡到雨披，水坑免疫！但橘座多拆了一角沙发。')}}
+ s.plotChoice.push(id+':'+i);addMoment({en:({boss:['Told the boss the metro had no signal.','Got overtime pay. The cat got overtime demolition.'],neighbor:['Hired a cat sitter.','Sent a brave voice note to the cat.'],guardian:['A hero cleared the sidewalk.','Drank the world’s most necessary water.'],rainbonus:['Ran through a surprise monsoon.','Found a poncho. Lost a corner of the sofa.']})[id][i],zh:({boss:['假装地铁没信号，成功摆脱领导。','接了领导电话，猫顺手承包拆迁。'],neighbor:['花钱雇人看猫。','向猫发了一段故作镇定的语音。'],guardian:['保安及时疏通了人行道。','喝到了世界上最及时的一瓶水。'],rainbonus:['踏着暴雨继续冲刺。','捡了雨披，沙发又损失了一角。']})[id][i],icon:'📱',weight:3});$('eventLayer').hidden=true;s.phase='play';lastFrame=performance.now();msg('🚀 决定做好了！继续回家！');if(s.cat>=100)finish(false);updateHud();}
+$('eventChoice0').addEventListener('click',()=>resolvePlotEvent(0));$('eventChoice1').addEventListener('click',()=>resolvePlotEvent(1));
+function harm(cat,energy,text,knock=40){const s=game;if(!s||s.player.invuln>0)return;const p=s.player;s.cat=clamp(s.cat+cat,0,100);p.energy=clamp(p.energy-energy,0,100);p.invuln=1.35;p.stun=.4;p.x=clamp(p.x-knock,START,WORLD_END);s.hits++;addMoment({en:'Got hit by a scooter... ON THE SIDEWALK.',zh:'走在人行道上，竟然还被电鸡撞了！',icon:'🛵',weight:7});bigMoment('💥',T('SIDEWALK?! SERIOUSLY?!','这可是人行道啊？！'),1.25);$('stage').classList.remove('screen-bump');void $('stage').offsetWidth;$('stage').classList.add('screen-bump');if((typeof text==='string'&&text.includes('人行道'))||(typeof text==='object'&&text.zh?.includes('人行道')))s.sideHits++;s.debris.push({x:p.x,y:p.y-27,ttl:.65,label:'!'});msg(text);record(text);if(s.cat>=100)finish(false);}
+function callCat(){const s=game;if(!s||s.phase!=='play')return;if(s.catUsed){msg('远程喊猫已经用过了，它现在无视你。');return}s.catUsed=true;s.pausedCat=s.catRule.id==='zoomies'?11:8;addMoment({en:'Yelled at a cat through a security camera.',zh:'隔着监控对橘猫大喊了一声。',icon:'📢',weight:3});record({en:`📢 You call through the camera. Cat freezes for ${Math.round(s.pausedCat)} seconds.`,zh:`📢 通过摄像头喊了一声。猫暂停 ${Math.round(s.pausedCat)} 秒。`});msg({en:`🐈 Cat distracted for ${Math.round(s.pausedCat)}s!`,zh:`🐈 橘座暂停 ${Math.round(s.pausedCat)} 秒！`});updateHud();}
+function interact(){const s=game;if(!s||s.phase!=='play')return;const p=s.player;const ob=s.nearest;if(!ob){msg('附近没什么可以互动的，还是回家要紧。');return}if(ob.type==='shortcut'){
+ ob.used=true;s.shortcuts++;const risk=runRng()<(s.city.id==='detour'?.55:.35),oldX=p.x;p.x=Math.min(WORLD_END-180,p.x+ob.skip+(s.city.id==='detour'?80:0));p.y=481;s.cat=clamp(s.cat+(risk?8:2),0,100);s.time+=(risk?3:1);s.events.push({ttl:2.6,text:risk?T('Shortcut under construction! Cat topples a frame.','近路施工！猫趁机推倒了相框'):T('Shortcut taken!','抄近路成功！')});record(risk?'🧱 巷子里居然在施工，虽然穿过去了，却花了点时间。':'🏃 穿过握手楼的小巷，省下了一大段路！');addMoment({en:risk?'The SECRET SHORTCUT was under construction.':'Found a hidden alley shortcut!',zh:risk?'所谓捷径竟然在施工！':'成功钻进一条秘密小巷！',icon:'🧱',weight:risk?5:3});msg(risk?T('⚠️ Construction! Cat damage +8%','⚠️ 小巷施工！惊险穿过，猫拆家 +8%'):T('✨ Shortcut! Skipped ','✨ 抄近路成功！跳过 ')+Math.round(p.x-oldX)+T(' m',' 米'));
+ }else if(ob.type==='stall'){
+ ob.used=true;s.foodUsed=true;s.money=Math.max(0,s.money-12);p.energy=clamp(p.energy+50,0,100);s.cat=clamp(s.cat+7,0,100);s.time+=4;record('🥢 啪，一份肠粉下肚，体力回来了。但猫偷偷把水杯移到了桌沿。');msg('🥢 肠粉：-12 元，体力 +50，猫拆家 +7%');
+ }else if(ob.type==='umbrella'){
+ ob.used=true;s.umbrella=true;s.money-=8;record('☂️ 便利店抢到一把伞！穿过水坑不再减速。');msg('☂️ 买到折叠伞！雨天水坑免疫，-8 元');
+ }s.nearest=null;checkQuest();updateHud();if(s.cat>=100)finish(false);
+}
+function currentArea(x=game?.player.x||START){const idx=clamp(Math.floor(Math.max(0,x-230)/SEG),0,4);return {idx,data:game.route[idx]};}
+function rainHere(x){return currentArea(x).data.id==='rain';}
+function update(dt){const s=game;if(!s||s.phase!=='play')return;dt=Math.min(.07,dt);s.elapsed+=dt;s.frame++;s.time+=dt*.88;s.toastCooldown=Math.max(0,s.toastCooldown-dt);s.pausedCat=Math.max(0,s.pausedCat-dt);s.night=clamp((s.time-18*60)/70,0,1);s.dashTime=Math.max(0,s.dashTime-dt);s.guardTime=Math.max(0,s.guardTime-dt);s.dodgeWindow=Math.max(0,s.dodgeWindow-dt);if(s.dodgeWindow<=0)s.dodgeChain=0;
+ if(s.pausedCat<=0){s.cat+=dt*(1.12 + s.night*.32)*(s.catRule.id==='zoomies'?1.24:s.catRule.id==='nap'?.82:1);} // 75~89 秒理论败北
+ if(s.catRule.id==='gremlin'&&s.elapsed>=s.catBurstNext){s.catBurstNext+=17;s.cat=clamp(s.cat+3.5,0,100);addMoment({en:'Cat demolished a whole shelf off-camera.',zh:'猫趁监控死角又推倒了一层架子。',icon:'📺',weight:5});bigMoment('📺',T('CAT INCIDENT: SHELF DOWN!','监控事故：置物架倒了！'),1.3)}
+ const p=s.player;p.invuln=Math.max(0,p.invuln-dt);p.stun=Math.max(0,p.stun-dt);s.warningCooldown=Math.max(0,s.warningCooldown-dt);
+ let dx=Number(keys.right)-Number(keys.left),dy=Number(keys.down)-Number(keys.up);const norm=Math.hypot(dx,dy)||1;dx/=norm;dy/=norm;
+ const dash=keys.sprint&&p.energy>1&&p.stun<=0&&(dx||dy),puddle=s.objects.some(o=>o.type==='puddle'&&Math.abs(p.x-o.x)<o.w*.5+9&&Math.abs(p.y-o.y)<o.h*.5+8);
+ let speed=(dash?255:157)*(s.city.id==='express'?1.16:1);if(s.dashTime>0)speed*=1.33;if(puddle&&!s.umbrella)speed*=s.city.id==='rain'?.43:.57;if(p.stun>0)speed*=.18;
+ if(dash)p.energy=Math.max(0,p.energy-(s.city.id==='express'?39:29)*dt);else p.energy=clamp(p.energy+((dx||dy)?11:17)*dt,0,100);
+ const nx=clamp(p.x+dx*speed*dt,START,WORLD_END),ny=clamp(p.y+dy*speed*dt,270,510);
+ const coll=(x,y)=>s.objects.some(o=>['barrier','cone','crate','stall','parked'].includes(o.type)&&Math.abs(x-o.x)<o.w*.5+11&&Math.abs(y-o.y)<o.h*.5+11);
+ if(!coll(nx,ny)){p.x=nx;p.y=ny}else{if(!coll(nx,p.y))p.x=nx;if(!coll(p.x,ny))p.y=ny;}
+ p.vx=dx*speed;p.vy=dy*speed;
+ const a=currentArea();if(a.idx!==s.lastArea){s.lastArea=a.idx;record({en:`📍 ${translations[a.data.subtitle]||a.data.subtitle}. ${a.data.id==='rain'?'Puddles can slow you down.':a.data.id==='scooter'?'Wrong-way scooters heading your way.':'Street surprises await.'}`,zh:`📍 ${a.data.subtitle}。 ${a.data.id==='rain'?'地上积水，穿过去可能减速。':a.data.id==='scooter'?'电动车从右侧迎面袭来。':'路边有惊喜，也可能有麻烦。'}`});if(a.idx>0)msg({en:`📍 DISTRICT ${a.idx+1}/5 · ${translations[a.data.name]||a.data.name}`,zh:`📍 进入街区 ${a.idx+1}/5 · ${a.data.name}`});}
+ s.nearest=null;let mind=999;
+ for(const o of s.objects){if(o.used||!['shortcut','stall','umbrella'].includes(o.type))continue;const d=Math.hypot((p.x-o.x)*1.0,(p.y-o.y)*1.15);if(d<85&&d<mind&&(!(o.type==='stall'&&s.money<12))&&(!(o.type==='umbrella'&&s.money<8))){s.nearest=o;mind=d}}
+ s.spawnTimer-=dt;if(s.spawnTimer<0){
+  s.spawnTimer=rnd(.72,1.35)*(s.city.id==='rush'?.72:1);
+  const behind=p.x>600&&runRng()<.35,dir=behind?1:-1;
+  const spawnX=behind?p.x-rnd(400,590):p.x+rnd(510,900);
+  if(spawnX>130&&spawnX<WORLD_END-80){
+    const type=currentArea(spawnX).data.id;
+    const spawnChance=type==='scooter'?.96:type==='metro'?.83:type==='village'?.77:.67;
+    if(runRng()<spawnChance){
+      const sidewalkChance=(type==='scooter'?.78:type==='metro'?.68:.55)*(s.guardTime>0?.22:1);
+      const onSidewalk=runRng()<sidewalkChance;
+      const lane=onSidewalk?choice([287,301,474,495]):choice([354,381,408]);
+      const cutting=runRng()<.27;
+      const targetY=cutting?(onSidewalk?choice([350,412]):choice([290,476])):lane;
+      s.scooters.push({x:spawnX,y:lane,goalY:targetY,spd:behind?rnd(215,285):rnd(212,300),dir,sidewalk:onSidewalk||cutting,color:choice(['#d46f55','#c7a166','#6e988b','#e8c4a3','#c1bfc0']),blink:rnd(0,5),hit:false,seen:false,nearMiss:false,warning:false});
+    }
+  }
+ }
+ s.threat=null;let closestThreat=9999;
+ for(const bike of s.scooters){
+   bike.x+=bike.dir*bike.spd*dt;
+   bike.y+=(bike.goalY-bike.y)*Math.min(1,dt*1.3);
+   bike.blink+=dt;
+   const xx=bike.x-p.x,yy=bike.y-p.y,closing=xx*bike.dir<0;
+   const sameLane=Math.abs(yy)<65;
+   const gap=Math.abs(xx);
+   if(!bike.hit&&closing&&sameLane&&gap<320&&gap<closestThreat){s.threat=bike;closestThreat=gap}
+   if(!bike.hit&&Math.abs(xx)<47&&Math.abs(yy)<27&&p.invuln<=0){
+     bike.hit=true;
+     if(bike.y<321||bike.y>446){harm(6,16,'🛵 人行道也被电鸡撞！你才是行人啊！',bike.dir<0?65:22)}
+     else harm(7,19,'🛵 电鸡横冲直撞！你被撞得怀疑人生。',bike.dir<0?65:22);
+   }
+   if(!bike.hit&&!bike.nearMiss&&Math.abs(xx)<34&&Math.abs(yy)>=27&&Math.abs(yy)<74){
+     bike.nearMiss=true;s.nearMisses++;s.dodgeChain=s.dodgeWindow>0?s.dodgeChain+1:1;s.dodgeBest=Math.max(s.dodgeBest,s.dodgeChain);s.dodgeWindow=8;p.energy=clamp(p.energy+(s.city.id==='rush'?13:4),0,100);addMoment({en:'Dodged a scooter by inches!',zh:'差几厘米就被电鸡撞上！',icon:'⚡',weight:4});checkQuest();if(s.dodgeChain===3){s.dashTime=Math.max(s.dashTime,6);s.pausedCat+=3;addMoment({en:'THREE scooter dodges in a row. Cat finally stunned.',zh:'三连闪躲过电鸡，猫都看傻了！',icon:'⚡',weight:9});bigMoment('⚡',T('TRIPLE DODGE! CAT STUNNED','三连极限闪避！猫都愣了'),2);p.energy=clamp(p.energy+20,0,100);record('⚡ 三连极限闪避！肾上腺素爆发：加速 6 秒，猫愣住 3 秒！');msg('⚡ 三连闪！加速 +6 秒 · 猫拆家暂停 3 秒');} 
+     s.debris.push({x:p.x,y:p.y-48,ttl:.7,label:T('CLOSE!','险！')});
+   }
+ }
+ if(s.threat&&s.warningCooldown<=0){
+   s.warningCooldown=1.1;honk();
+   const b=s.threat;
+   if(b.kind==='car')record('🚕 机动车道不是逃生通道！前方有车快速驶来！');else if(b.y<321||b.y>446)record(b.dir>0?'📣 背后滴滴！电鸡在你身后占着人行道追上来了！':'⚠️ 前方电鸡逆行上人行道！快找空隙躲开！');
+ }
+ // 马路不是安全捷径：机动车会从远处驶来，威胁判定与人行道骑行共用预警机制
+ s.carTimer-=dt;
+ if(s.carTimer<=0){
+   s.carTimer=rnd(2.2,3.65);
+   const x=p.x+rnd(530,860);
+   if(x<WORLD_END-40){s.cars.push({kind:'car',x,y:choice([350,384,416]),dir:-1,spd:rnd(310,405),color:choice(['#e4b56b','#6e8f91','#bd7b62']),hit:false});}
+ }
+ for(const car of s.cars){
+   car.x+=car.dir*car.spd*dt;
+   const xx=car.x-p.x,yy=car.y-p.y,gap=Math.abs(xx);
+   if(!car.hit&&xx>0&&Math.abs(yy)<62&&gap<320&&gap<closestThreat){s.threat=car;closestThreat=gap;}
+   if(!car.hit&&gap<64&&Math.abs(yy)<29&&p.invuln<=0){car.hit=true;harm(14,27,'🚕 被迫走机动车道，差点撞上车！这条路更危险！',78)}
+ }
+ s.cars=s.cars.filter(c=>c.x>p.x-990&&c.x<p.x+1200);
+ s.scooters=s.scooters.filter(b=>b.x>p.x-990&&b.x<p.x+1200);
+
+
+ for(const gift of s.pickups){if(!gift.used&&Math.abs(p.x-gift.x)<38&&Math.abs(p.y-gift.y)<35)collectPickup(gift);}
+
+ for(const ped of s.peds){ped.phase+=dt*ped.speed;ped.y=ped.originY+Math.sin(ped.phase)*19;ped.x=ped.origin+Math.sin(ped.phase*.42)*10;if(Math.abs(ped.x-p.x)<24&&Math.abs(ped.y-p.y)<23&&p.invuln<=0&&p.stun<=0){harm(2,10,'🚶 撞到赶地铁的行人！被瞪了一眼。',15)}}
+ for(const d of s.debris)d.ttl-=dt;s.debris=s.debris.filter(d=>d.ttl>0);
+ const thresholds=[24,45,67,84];if(s.catMilestone<thresholds.length&&s.cat>=thresholds[s.catMilestone]){const lines=['📹 监控：橘座试探性碰了一下水杯。','📹 监控：第一盆绿植光荣退役。','📹 监控：沙发迎来史上最大挑战。','🚨 监控：家具进入最终倒计时！'];record(lines[s.catMilestone]);msg(lines[s.catMilestone]);if(s.catMilestone===1||s.catMilestone===3){const text=s.catMilestone===1?T('PLANT DOWN! YOUR CAT HAS NO REGRETS','绿植阵亡！猫没有一点悔意'):T('CAT FINAL BOSS PHASE','橘猫进入最终 BOSS 阶段');bigMoment('🐈',text,1.45);addMoment({en:s.catMilestone===1?'The cat eliminated the first houseplant.':'The cat entered FINAL BOSS MODE.',zh:s.catMilestone===1?'橘座成功击败了第一盆绿植。':'橘座进入了最终 BOSS 模式。',icon:'🐈',weight:6});}s.catMilestone++;}
+  if(p.x>=WORLD_END-40){p.x=WORLD_END-40;finish(true)}else if(s.cat>=100){s.cat=100;finish(false)}else if(s.plotIndex<s.plotEvents.length&&p.x>=s.plotNextX){openPlotEvent(s.plotEvents[s.plotIndex]);s.plotIndex++;s.plotNextX=s.plotIndex===1?3330:999999;}
+}
+function box(x,y,w,h,c){g.fillStyle=c;g.fillRect(Math.round(x),Math.round(y),Math.round(w),Math.round(h))}
+function pbox(x,y,w,h,depth,front,top,side){g.fillStyle=top;g.beginPath();g.moveTo(Math.round(x),Math.round(y));g.lineTo(x+depth,y-depth*.55);g.lineTo(x+w+depth,y-depth*.55);g.lineTo(x+w,y);g.fill();box(x,y,w,h,front);g.fillStyle=side;g.beginPath();g.moveTo(x+w,y);g.lineTo(x+w+depth,y-depth*.55);g.lineTo(x+w+depth,y+h-depth*.55);g.lineTo(x+w,y+h);g.fill()}
+function drawBackdrop(){const s=game||{night:0},n=s.night||0;
+ const sky=g.createLinearGradient(0,0,0,330);sky.addColorStop(0,n>.65?'#66727d':'#e3b286');sky.addColorStop(.7,n>.65?'#7b797b':'#e7b28a');sky.addColorStop(1,'#cc9b76');g.fillStyle=sky;g.fillRect(0,0,W,H);
+ box(725-n*45,37,38,36,n>.65?'#f7cdae':'#ffe2a0');box(730-n*45,32,29,5,n>.65?'#f7cdae':'#ffe2a0');
+ for(let i=0;i<39;i++){const x=mod(i*57-camX*.16,W+120)-30,h=46+((i*23)%75);box(x,233-h,55,h,n>.4?'#8d8080':'#c09884');for(let j=0;j<4;j++){for(let k=0;k<2;k++)box(x+7+j*12,243-h+k*15,5,8,n>.7?'#f6d9a4':'#987d72')}}
+}
+function drawGround(){box(0,251,W,289,'#b8ac94');box(0,251,W,4,'#ece2bb');box(0,317,W,124,'#777b77');box(0,320,W,4,'#aaa9a0');box(0,437,W,5,'#cbbba0');box(0,445,W,95,'#afab98');for(let k=0;k<18;k++){const x=mod(k*82-camX,1000)-28;box(x,383,39,4,'#e9dcb4');box(x,326,2,18,'#777b77');box(x,457,35,2,'#d6c8b1')}
+ // 地面凸点砖与淡金色盲道: 部分路段被乱停电鸡占据
+ box(0,300,W,12,'#c6b57f');box(0,485,W,10,'#bdaf7d');
+ for(let k=0;k<68;k++){const x=mod(k*26-camX,1040)-30;for(let m=0;m<3;m++){box(x+3+m*5,303,3,3,'#e8d39c');box(x+3+m*5,488,3,3,'#d7c595')}}
+ for(let i=0;i<65;i++){const x=mod(i*46-camX,1100)-30;box(x,270,2,2,i%3?'#e0c7a5':'#9d9582');box(x+17,486,3,2,'#d0bfa3')}
+}
+function building(x,index,kind){const bW=140+(index%4)*25,height=110+(index*39%95),y=251-height;const cool=kind==='metro',color=(index%5===0?'#aa796b':index%3===0?'#c1a28a':'#bda082');pbox(x,y,bW,height,13,color,cool?'#d5c1a7':'#dcb99c','#826e68');
+ box(x,y+height-25,bW,23,(index%3===0?'#8d6e59':'#635d52'));for(let yy=y+15;yy<y+height-33;yy+=26)for(let xx=x+10;xx<x+bW-8;xx+=28){box(xx,yy,18,16,'#615951');box(xx+2,yy+2,14,12,(index+xx/28)%3<1?'#78999c':'#f3d19a');box(xx+9,yy+2,2,12,'#a18667')}
+ const shops=['肠粉','便利店','糖水','地铁口','珠江夜话','落班啦','手机维修','烧腊','快递站'];box(x+18,233,Math.min(96,bW-24),18,index%3===0?'#cb704f':'#527168');g.font='bold 13px sans-serif';g.fillStyle='#f4e2c2';g.fillText(kind==='metro'&&index%2===0?T('METRO EXIT','地铁  EXIT'):translate(shops[index%shops.length]),x+25,247);
+ if(index%3===1){box(x+bW-18,224,4,33,'#716b58');box(x+bW-26,217,20,8,'#cda76b')} }
+function drawCity(){const s=game;const idx=s?currentArea().idx:0;const kind=s?s.route[idx].id:'scooter';drawBackdrop();drawGround();const bidx=Math.floor(camX/185);for(let i=bidx-2;i<bidx+9;i++){if(i<0)continue;const worldX=i*185-70;building(worldX-camX,i,kind)}
+ // stylized platform boundary and street furniture
+ const first=Math.floor(camX/300)-1;for(let i=first;i<first+7;i++){const x=i*300+140-camX;box(x,239,6,83,'#4c5a50');box(x-8,236,24,8,'#5f5a4d');box(x-5,231,19,7,s?.night>.35?'#ffe2a4':'#d8b27e');box(x-9,314,24,4,'#c9b18f');
+ if(i%3===0){box(x-42,463,9,36,'#625947');for(let k=0;k<4;k++){box(x-57+k*8,443+(k%2)*5,24,29,k%2?'#64815e':'#7c956a')}}}
+ // zebra at borders
+ for(let i=1;i<=5;i++){const world=230+i*SEG-95;const x=world-camX;if(x>-120&&x<W+90){for(let k=0;k<7;k++)box(x+k*14,328,8,106,'#c4c4ae');}}
+ // street character: yellow tram sign and bilingual neighbourhood
+ for(let i=0;i<5;i++){const boundary=230+i*SEG;let x=boundary-camX;if(x>-180&&x<1100){box(x+12,284,97,20,'#55675c');g.fillStyle='#e8d3aa';g.font='bold 12px sans-serif';g.fillText(translate(s.route[i].name),x+18,298)}}
+}
+function drawObject(o,t){const x=Math.round(o.x-camX),y=Math.round(o.y);if(x<-180||x>W+180)return;
+ if(o.type==='puddle'){g.globalAlpha=.85;box(x-o.w*.5,y-o.h*.5,o.w,o.h,'#719a9a');box(x-o.w*.4,y-o.h*.35,o.w*.65,4,'#b5d1c7');g.globalAlpha=1}
+ else if(o.type==='barrier'){box(x-o.w/2+3,y+1,o.w,7,'#403c37');pbox(x-o.w/2,y-o.h/2,o.w,o.h,5,'#d3a273','#e2cba3','#9e765f');for(let i=0;i<4;i++)box(x-o.w/2+4+i*19,y-12,10,18,'#b75b45')}
+ else if(o.type==='parked'){
+   box(x-o.w*.5-4,y+10,o.w+8,6,'#4d4c4780');
+   // 有车停在人行道/盲道上，玩家必须挤过去
+   for(let i=0;i<2;i++)box(x-27+i*42,y+5,13,14,'#343f40');
+   box(x-o.w*.5+3,y-10,o.w-9,17,o.color);box(x-15,y-25,30,20,o.color);
+   box(x+o.w*.5-5,y-26,5,22,'#525a53');box(x+o.w*.5-12,y-28,23,4,'#e6d3aa');
+   box(x-o.w*.5+10,y-14,15,4,'#e9d19e');
+ }
+ else if(o.type==='cone'){box(x-12,y+9,30,5,'#56544e');box(x-6,y-16,18,27,'#d78155');box(x-5,y-4,16,5,'#fff0c1')}
+ else if(o.type==='crate'){pbox(x-o.w*.5,y-o.h*.5,o.w,o.h,6,'#957558','#bfa57a','#594b40');box(x-8,y-11,12,5,'#c3a274');box(x+15,y-8,3,21,'#77624b')}
+ else if(o.type==='stall'){pbox(x-53,y-28,106,42,5,'#87694c','#ebc99f','#5b483c');box(x-60,y-67,118,31,'#bb674d');for(let k=0;k<9;k++)box(x-59+k*13,y-67,7,31,'#e8be89');box(x-14,y-14,39,8,'#f2dfbb');box(x-11,y-25,34,9,'#aeb49c');g.font='bold 17px sans-serif';g.fillStyle='#ffe1a9';g.fillText(T('RICE','肠 粉'),x-27,y-45);if(o.used){box(x-55,y-38,107,5,'#473c36')}}
+ else if(o.type==='shortcut'){box(x-45,y-27,88,52,'#5c554b');box(x-37,y-21,73,43,o.used?'#61564c':'#354b43');box(x-27,y-16,4,38,'#daa66e');box(x+19,y-16,4,38,'#daa66e');g.font='bold 13px sans-serif';g.fillStyle='#ffe2a4';g.fillText(o.used?T('USED','已走过'):T('CUT →','近路 →'),x-32,y+5);if(!o.used){box(x-34,y+18,64,3,'#ffcf81');box(x-5,y-36+Math.sin(t*4)*4,10,7,'#ffe7ae')}}
+ else if(o.type==='umbrella'){box(x-22,y-13,54,33,o.used?'#6b726e':'#698f7b');g.fillStyle='#eaf0c6';g.font='bold 14px sans-serif';g.fillText(o.used?T('OUT','售罄'):T('UMBRELLA','雨伞'),x-21,y+7);if(!o.used)box(x-26,y-17,62,4,'#f5c682')}
+}
+function pedestrian(x,y,color,t,phase){x-=camX;if(x<-40||x>W+40)return;const pace=Math.sin(phase*3);box(x-10,y-1,27,4,'#45444067');box(x-4,y-6,6,16,'#3f4343');box(x+5,y-6+pace*2,6,16,'#4b514e');box(x-8,y-34,23,30,color);box(x-4,y-48,16,16,'#edc09b');box(x-7,y-50,22,7,'#333b3c');box(x+14,y-26,10,20,'#c8a074')}
+function vehicle(o,t){const x=o.x-camX,y=o.y;if(x<-130||x>W+130)return;
+  g.save();g.translate(Math.round(x),Math.round(y));g.scale(o.dir||-1,1);
+  box(-34,17,77,6,'#383e3c7d');box(-24,9,14,16,'#323839');box(20,9,14,16,'#31393c');
+  box(-23,-5,51,17,o.color);box(-10,-20,23,18,o.color);box(-21,-6,38,5,'#d8cba4');
+  box(30,-18,5,23,'#424940');box(29,-18,17,4,'#d7d4b3');
+  box(-11,-33,20,17,'#4e5958');box(-8,-43,15,13,'#e0bb91');box(-12,-48,23,8,'#dcad71');
+  if(Math.sin(t*8+o.blink)>0)box(36,-8,7,5,'#fff0b3');g.restore();
+  if(game&&game.player&&Math.abs(o.x-game.player.x)<280&&Math.abs(o.y-game.player.y)<65){
+    g.fillStyle='#ffecb2';g.font='bold 20px sans-serif';g.fillText(T('BEEP!','滴！'),x-14,y-57+(Math.sin(t*15)*2));
+    box(x-26,y-83,35,4,'#f5ce7d');
+  }
+}
+function drawCar(o,t){
+ const x=o.x-camX,y=o.y;if(x<-170||x>W+170)return;
+ box(x-57,y+16,121,7,'#333b3a88');box(x-49,y+7,22,18,'#354044');box(x+34,y+7,22,18,'#354044');
+ box(x-59,y-31,113,42,o.color);box(x-27,y-47,49,20,o.color);box(x-18,y-43,28,16,'#91b1b1');
+ box(x-53,y-20,22,12,'#f9e8b6');box(x+36,y-20,13,11,'#b85b4e');
+ box(x-36,y+5,67,3,'#f2d9ae');box(x-13,y-56,26,7,'#f4d89d');
+}
+function playerSprite(p,t){const x=Math.round(p.x-camX),y=Math.round(p.y),bounce=Math.abs(p.vx)+Math.abs(p.vy)>20?Math.sin(t*19)*2:0;g.globalAlpha=(p.invuln>0&&Math.sin(t*26)>0)?0.45:1;box(x-15,y+5,39,7,'#2b313082');box(x-11,y-4,10,21,'#3c4541');box(x+7,y-4-bounce,10,21,'#343e3b');box(x-17,y-40+bounce,35,37,'#6b7976');box(x-18,y-40+bounce,12,37,'#b9a377');box(x-14,y-66+bounce,27,26,'#efc39c');box(x-15,y-68+bounce,30,9,'#272f2e');box(x-12,y-71+bounce,20,5,'#343535');box(x+17,y-40+bounce,7,27,'#e6b48d');box(x+21,y-16+bounce,17,17,'#bc855c');box(x+22,y-13+bounce,12,9,'#e4b57b');box(x-21,y-37+bounce,5,21,'#deb18a');box(x-4,y-41+bounce,6,17,'#e0c3a4');box(x-3,y-47+bounce,5,6,'#eeba65');box(x+16,y-60+bounce,16,7,'#5e5e4c');g.globalAlpha=1}
+function drawHome(){const x=WORLD_END-camX;if(x>W+220||x<-250)return;pbox(x-65,161,210,148,13,'#b3937b','#e6cbaa','#826e60');box(x-10,248,60,65,'#665448');box(x+2,259,36,54,'#a47761');box(x+29,281,6,6,'#f9db9d');box(x-53,173,120,22,'#a56c50');g.fillStyle='#ffdc9c';g.font='bold 18px sans-serif';g.fillText(T('HOME','我 的 家'),x-42,190);box(x-78,315,245,4,'#dbc6a7');box(x-28,280,8,18,'#8a785e')}
+function rainFX(t){if(!game)return;const type=currentArea().data.id;if(type!=='rain')return;g.globalAlpha=.6;for(let i=0;i<95;i++){const rx=mod(i*173+t*220,1020)-40,ry=mod(i*127+t*350,610)-20;box(rx,ry,2,11,'#d8e6db')}g.globalAlpha=1;box(0,0,W,H,'#6a839022')}
+function drawScene(t){if(!game)return;camX=clamp(camX+(clamp(game.player.x-270,0,WORLD_END-875)-camX)*.095,0,WORLD_END-875);drawCity();for(const o of game.objects){if(o.type==='puddle')drawObject(o,t)}
+ for(const o of game.objects){if(o.type!=='puddle')drawObject(o,t)}
+ for(const gift of game.pickups){if(gift.used)continue;const x=Math.round(gift.x-camX),y=Math.round(gift.y+Math.sin(t*4+gift.phase)*5);if(x<-40||x>W+40)continue;g.globalAlpha=.2;g.fillStyle='#ffe5a6';g.fillRect(x-19,y-22,40,43);g.globalAlpha=1;box(x-14,y-21,32,32,'#3b5748');g.strokeStyle='#ffe2a1';g.lineWidth=3;g.strokeRect(x-14,y-21,32,32);g.fillStyle='#fff0b8';g.font='bold 21px sans-serif';g.textAlign='center';g.fillText(({energy:'☕',treat:'🐟',boost:'⚡',lucky:'★'})[gift.kind],x+2,y+4);g.textAlign='left';}
+
+ for(const ped of game.peds)pedestrian(ped.x,ped.y,ped.color,t,ped.phase);
+ for(const car of game.cars)drawCar(car,t);
+ for(const bike of game.scooters)vehicle(bike,t);
+ drawHome();playerSprite(game.player,t);
+ for(const d of game.debris){const x=d.x-camX,y=d.y-d.ttl*36;g.fillStyle='#fff0b9';g.font='bold 30px sans-serif';g.fillText(d.label,x,y)}
+ rainFX(t);const n=game.night;g.fillStyle=`rgba(24,31,50,${(n*.25).toFixed(3)})`;g.fillRect(0,0,W,H);
+ const shadow=g.createLinearGradient(0,340,0,540);shadow.addColorStop(0,'#ffe5bb00');shadow.addColorStop(1,n>.6?'#1d2b3c30':'#bf713418');g.fillStyle=shadow;g.fillRect(0,340,W,200);
+ // navigation marker
+ const remaining=WORLD_END-game.player.x;if(remaining>700){const arrowX=900;box(arrowX-12,20,37,29,'#3e493eb8');g.fillStyle='#ffdb8a';g.font='bold 27px sans-serif';g.fillText('➜',arrowX-9,44)}
+}
+function cbox(x,y,w,h,c){cg.fillStyle=c;cg.fillRect(Math.round(x),Math.round(y),Math.round(w),Math.round(h))}
+function drawCat(t){const s=game;if(!s)return;const bad=s.cat,paused=s.pausedCat>0;const shaking=bad>80?Math.sin(t*20)*3:0;cg.save();cg.translate(shaking,0);cbox(0,0,320,200,'#b9b69b');cbox(0,125,320,75,'#9c8770');cbox(0,0,320,125,'#b2ad91');cbox(20,14,119,88,'#6d7d79');cbox(27,20,105,77,'#8ba6a0');cbox(75,20,3,78,'#d7d7b6');cbox(28,61,106,3,'#d7d7b6');cbox(21,104,118,9,'#817b66');
+ // sofa and picture
+ cbox(158,93,132,56,'#88705a');cbox(163,90,122,18,'#aa8c69');cbox(166,108,115,39,'#a78e70');cbox(169,145,7,23,'#564d41');cbox(273,145,7,23,'#564d41');cbox(176,110,41,32,'#bd9f7e');cbox(229,109,39,34,'#bca47d');
+ if(bad>43)for(let i=0;i<Math.floor((bad-35)/8);i++)cbox(175+i*10,131+i%3*7,7,3,'#ded7ad');
+ if(bad<27){cbox(164,17,73,6,'#81664c');cbox(173,23,4,43,'#6d5846');cbox(227,23,4,42,'#6d5846');cbox(178,28,43,33,'#d1bc9b');cbox(188,36,23,18,'#91a08a')}else{cbox(200,83,61,5,'#877258');cbox(216,75,32,7,'#d3bb9c');cbox(242,67,17,16,'#92a68a')}
+ // table and plant
+ cbox(16,152,83,7,'#675849');cbox(22,159,6,25,'#564737');cbox(82,159,7,25,'#564737');
+ if(bad<25){cbox(54,125,21,24,'#bb755d');cbox(59,117,11,12,'#677f59');cbox(62,108,6,14,'#677f59');cbox(50,111,12,6,'#78996d')}
+ else{cbox(15,183,30,6,'#bb755d');cbox(44,175,22,5,'#a6b18c');cbox(61,181,18,5,'#bba48b');if(bad>65)cbox(86,181,38,6,'#e1d0b0')}
+ if(bad>55){for(let i=0;i<13;i++){cbox(12+i*23,175+(i*7)%17,9,4,'#dbcfb6');cbox(16+i*23,175+(i*7)%17,3,9,'#6f6256')}}
+ // voxel orange cat
+ const x=87+Math.sin(t*1.4)*3,y=bad>45?136:139;const lift=paused?0:Math.sin(t*5)*1.5;
+ cbox(x+15,y+17,53,32,'#c8894e');cbox(x+59,y+10,9,24,'#b9763f');cbox(x+62,y+3,8,17,'#ce8b4d');cbox(x,y-1+lift,46,34,'#e7a65e');cbox(x+3,y-13+lift,13,17,'#d78a4b');cbox(x+31,y-13+lift,13,17,'#d78a4b');cbox(x+12,y+8+lift,5,6,'#433e35');cbox(x+34,y+8+lift,5,6,'#433e35');cbox(x+24,y+18+lift,6,3,'#9d664e');cbox(x+11,y+29+lift,6,13,'#c9854e');cbox(x+43,y+37+lift,8,7,'#bf7d49');cbox(x+5,y+1+lift,37,3,'#f1ba77');if(paused){cg.fillStyle='#ffebb6';cg.font='bold 17px sans-serif';cg.fillText(T('MEOW?','咪?'),x+17,y-23)}
+ if(bad>75){cbox(0,0,320,200,'#4d202017');for(let i=0;i<6;i++){cbox((i*67+t*11)%320,(i*47)%200,27,2,'#fbb7a64d')}}
+ // cam timestamp
+ cbox(7,7,107,16,'#292f29aa');cg.fillStyle='#f4e7b8';cg.font='bold 12px monospace';cg.fillText(T('HOME CAM 01','家中监控 01'),13,19);cbox(276,8,10,10,paused?'#9ed2a9':'#ef6e6b');cg.fillStyle='#f1e5c5';cg.font='bold 12px monospace';cg.fillText(timeText(s.time),260,195);
+ cg.restore();}
+function calcResult(s){const survived=s.phase==='win',integrity=Math.max(0,100-Math.floor(s.cat));
+ s.score=Math.max(0,Math.round((survived?1650:250)+integrity*15+s.nearMisses*42+s.shortcuts*110+s.dodgeBest*65+s.lootTaken*65+s.bonusScore+s.questBonus-s.hits*180-Math.floor(s.elapsed*7)));
+ s.rank=survived?(integrity>=80&&s.hits<=1?T('SIDEWALK DODGE MASTER','广州人行道闪避大师'):integrity>=50?T('ON-TIME CAT RESCUER','准点猫奴特派员'):T('BARELY MADE IT HOME','残血归家勇士')):(s.hits>=4?T('SCOOTER SIEGE SURVIVOR','电鸡围城受害者'):T('CAT DEMOLITION WITNESS','橘座拆迁见证人'));
+ s.achievement=[s.questDone?T('🎯 SIDE QUEST CLEAR','🎯 支线完成'):null,s.lootTaken>=3?T('🎁 LOOT GOBLIN','🎁 路边捡漏王'):null,survived?T('🏠 MADE IT HOME','🏠 生还'):T('💥 HOUSE DESTROYED','💥 家没了'),s.hits===0?T('🥇 NO COLLISIONS','🥇 零事故'):T(`🛵 COLLISIONS ×${s.hits}`,`🛵 剐蹭 ×${s.hits}`),s.dodgeBest>=3?T('⚡ TRIPLE DODGE','⚡ 极限三连闪'):null,s.shortcuts>=2?T('🧱 SHORTCUT LEGEND','🧱 城中村抄近路王'):null,s.catUsed?T('📢 CALLED THE CAT','📢 远程哄猫'):T('🐈 NO CAT CALLS','🐈 没哄过猫')].filter(Boolean).slice(0,4);
+ s.ending=survived?(integrity>=80?T('Scooters broke every sidewalk rule. Your cat acts like nothing happened.','这一路电鸡逆行，只有你的猫像没事发生过一样。'):integrity>=50?T('You got home safely. The sofa did not.','你安全回家了，但沙发今天不太安全。'):T('The cat welcomes you with the face of a proud interior designer.','猫看你进门，露出了刚结束装修的表情。')):(s.hits>=4?T('The sidewalk failed you. Your cat finished off the sofa.','人行道没让你顺利回家，橘座也没让沙发活下来。'):T('You outran the scooters. You still lost to a cat.','你跑赢了电鸡，又输给了一只猫。'));
+}
+
+function drawRound(cx,x,y,w,h,r,color){cx.fillStyle=color;cx.beginPath();cx.roundRect(x,y,w,h,r);cx.fill()}
+function buildPoster(s){const c=document.createElement('canvas');c.width=1080;c.height=1350;const p=c.getContext('2d');p.imageSmoothingEnabled=false;
+ const survived=s.phase==='win',integrity=Math.max(0,100-Math.floor(s.cat)),seed=('00000'+s.seed).slice(-6);
+ const bg=p.createLinearGradient(0,0,0,1350);bg.addColorStop(0,survived?'#365144':'#54362f');bg.addColorStop(.5,'#21322c');bg.addColorStop(1,'#101e1b');p.fillStyle=bg;p.fillRect(0,0,1080,1350);
+ p.fillStyle='#ccaa73';p.fillRect(54,52,11,80);p.fillStyle='#f7d99a';p.font=T('900 58px system-ui, sans-serif','900 61px "Microsoft YaHei","Noto Sans CJK SC",sans-serif');p.fillText(T('GOTTA GO BY SIX','六点必须走'),86,110);
+ p.fillStyle='#d0ddc0';p.font='700 26px sans-serif';p.fillText(T('THE CAT IS WAITING  /  GUANGZHOU COMMUTE','猫 在 等 我   /   THE CAT IS WAITING'),88,149);
+ p.textAlign='right';p.fillStyle='#edcf9a';p.font='bold 22px monospace';p.fillText('AFTER WORK  /  V0.6',1025,75);p.textAlign='left';
+ drawRound(p,54,189,972,88,13,survived?'#c8b07f':'#ce846a');p.fillStyle='#223329';p.font=T('900 33px system-ui,sans-serif','900 37px "Microsoft YaHei",sans-serif');p.fillText(survived?T('🏠 HOME SAFE','🏠 归家生还'):T('💥 HOUSE LOST','💥 家具团灭'),80,246);p.font=T('bold 20px system-ui,sans-serif','bold 25px "Microsoft YaHei",sans-serif');p.textAlign='right';p.fillText(s.rank,994,244);p.textAlign='left';
+ drawRound(p,54,305,972,446,16,'#101b18');p.save();p.beginPath();p.roundRect(66,317,948,420,9);p.clip();p.drawImage(CAN,0,0,CAN.width,CAN.height,66,317,948,533);p.restore();
+ drawRound(p,712,512,300,220,10,'#17271f');p.strokeStyle='#f7d89e';p.lineWidth=5;p.strokeRect(721,522,280,186);p.drawImage(CAT,0,0,320,200,723,524,276,182);
+ p.fillStyle='#19251fe8';p.fillRect(729,665,260,36);p.fillStyle='#ffe6b1';p.font='bold 18px sans-serif';p.fillText(T('● HOME CAM · '+integrity+'% INTACT','● 家中监控 · 完好 '+integrity+'%'),740,689);
+ const data=[[T('RUN SCORE','本局评分'),s.score.toLocaleString(lang==='zh'?'zh-CN':'en-US')],[T('ARRIVAL TIME','到家时间'),timeText(s.time)],[T('FURNITURE LEFT','家具幸存'),integrity+'%'],[T('COLLISIONS','人车剐蹭'),T(`${s.hits}` ,`${s.hits} 次`)],[T('CLOSE DODGES','极限闪避'),T(`${s.nearMisses}`,`${s.nearMisses} 次`)],[T('SHORTCUTS','抄近路'),T(`${s.shortcuts}`,`${s.shortcuts} 次`)]];
+ data.forEach(([k,v],i)=>{const x=54+i%3*329,y=785+Math.floor(i/3)*127;drawRound(p,x,y,314,112,11,'#354a3c');p.fillStyle='#c6d1b6';p.font=T('700 19px system-ui,sans-serif','700 22px sans-serif');p.fillText(k,x+20,y+35);p.fillStyle='#ffe0a1';p.font='900 38px system-ui,sans-serif';p.fillText(v,x+20,y+83)});
+ drawRound(p,54,1072,972,144,12,'#d3bc93');p.fillStyle='#26392d';p.font=T('900 26px system-ui,sans-serif','900 25px "Microsoft YaHei",sans-serif');p.fillText(T('THE CLIP WORTH SHARING:','本局最离谱瞬间：'),77,1113);p.font=T('600 24px system-ui,sans-serif','600 23px "Microsoft YaHei",sans-serif');wrapPosterText(p,bestMoment(s)[lang],77,1158,913,32);
+ p.fillStyle='#b4c4ae';p.font='bold 22px monospace';p.fillText(T('#GottaGoBySix   #BeatMyCommute','#六点必须走   #挑战同款路线'),54,1271);p.textAlign='right';p.fillText(seedCode(s.seed)+'  ·  BEAT MY RUN',1026,1271);p.textAlign='left';p.fillStyle='#738c7c';p.fillRect(54,1292,972,2);
+ const caption=T(`I ${survived?'made it home':'lost my home to the cat'} in Gotta Go by Six! 🐈\n🏠 Furniture intact: ${integrity}%  🛵 Collisions: ${s.hits}  ⚡ Close dodges: ${s.nearMisses}\n🏅 ${s.rank} | Score ${s.score}\n“${bestMoment(s).en}”\n🎲 Challenge: ${seedCode(s.seed)} · Beat my score!\n#GottaGoBySix #BeatMyCommute`,`我在《六点必须走》里${survived?'成功下班回家':'把家输给了猫'}！\n🏠 家具幸存 ${integrity}%  🛵 剐蹭 ${s.hits} 次  ⚡ 极限闪避 ${s.nearMisses} 次\n🏅 ${s.rank}｜本局 ${s.score} 分\n「${bestMoment(s).zh}」\n🎲 挑战码 ${seedCode(s.seed)}，来破我的记录！\n#六点必须走 #下班挑战`);
+ const url=c.toDataURL('image/png');const bin=atob(url.split(',')[1]);const bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);const file=new File([bytes],`${T('GottaGoBySix_','六点必须走_结局战报_')}${seed}_${lang}.png`,{type:'image/png'});
+ return {canvas:c,url,file,caption,filename:file.name};
+}
+
+function wrapPosterText(c,text,x,y,maxW,lineH){let line='';for(const ch of text){if(c.measureText(line+ch).width>maxW){c.fillText(line,x,y);y+=lineH;line=''}line+=ch}if(line)c.fillText(line,x,y)}
+function setShareStatus(t){$('shareStatus').textContent=t;}
+function openShare(){if(!game||!['win','lose'].includes(game.phase))return;if(!shareCache){try{shareCache=buildPoster(game);}catch(e){setShareStatus(T('Poster failed. Please retry.','战报生成失败，请重试'));return}}$('posterPreview').src=shareCache.url;$('shareCaptionPreview').textContent=shareCache.caption;$('highlightTag').textContent='🎬 '+bestMoment(game)[lang];$('copyCode').textContent=publicChallengeUrl()?T('🔗 COPY CHALLENGE LINK','🔗 复制挑战链接'):T('📋 COPY RUN CODE','📋 复制挑战码');$('shareLayer').hidden=false;setShareStatus(T('Your poster and caption are ready. Save or share below.','图片与战报已准备好。保存后可直接发朋友圈或社交平台。'))}
+function closeShare(){$('shareLayer').hidden=true}
+function downloadPoster(){if(!shareCache)return;const a=document.createElement('a');a.href=shareCache.url;a.download=shareCache.filename;document.body.appendChild(a);a.click();a.remove();setShareStatus(T('PNG download started.','高清 PNG 已交给浏览器下载。'))}
+async function copyCaption(){if(!shareCache)return false;const v=shareCache.caption;try{if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(v);setShareStatus(T('📋 Caption copied! Paste it into your post.','📋 文案已复制！粘贴到社交平台即可。'));return true}}catch(e){}
+ const t=document.createElement('textarea');t.value=v;t.style.cssText='position:fixed;left:-9999px;top:0';document.body.appendChild(t);t.focus();t.select();let ok=false;try{ok=document.execCommand('copy')}catch(e){}t.remove();setShareStatus(ok?T('📋 Caption copied!','📋 文案已复制！'):T('Clipboard blocked. Select and copy the caption manually.','浏览器限制自动复制，请长按文案手动复制。'));return ok;}
+function openSocial(u){window.open(u,'_blank','noopener,noreferrer')}
+async function shareNative(){if(!shareCache)return;if(!navigator.share){setShareStatus(T('Native sharing unavailable. Save the image and copy caption instead.','当前环境没有系统分享，请先保存图片与复制文案。'));return}const data={title:T('Gotta Go by Six · Commute Report','六点必须走 · 今日下班战报'),text:shareCache.caption};if(typeof navigator.canShare==='function'&&navigator.canShare({files:[shareCache.file]}))data.files=[shareCache.file];
+ try{await navigator.share(data);setShareStatus(T('Share sheet opened. Confirm in the target app.','已打开系统分享流程。请在目标应用中确认发布。'))}catch(e){if(e.name!=='AbortError')setShareStatus(T('Native share unavailable. Save the PNG and copy the caption.','系统分享不可用，请保存图片再复制文案。'));else setShareStatus(T('Share canceled. Nothing was posted.','已取消分享，没有发布任何内容。'))}}
+function shareInstagram(){if(!shareCache)return;downloadPoster();copyCaption();openSocial('https://www.instagram.com/');setShareStatus(T('Image download and caption copy requested. Upload and paste inside Instagram.','已准备下载图片并尝试复制文案；请在 Instagram 上传图片，粘贴文案。'))}
+function shareX(){if(!shareCache)return;const s=game,integrity=Math.max(0,100-Math.floor(s.cat));const playableLink=publicChallengeUrl();const tweet=T(`My cat vs. my commute. I ${s.phase==='win'?'MADE IT HOME':'LOST MY HOUSE'}! 🐈\n🏠 ${integrity}% furniture · 🛵 ${s.hits} hits · ⚡ ${s.nearMisses} dodges\n🎲 ${seedCode(s.seed)} · ${s.score} pts. BEAT ME!\n${playableLink||''}\n#GottaGoBySix #BeatMyCommute`,`我和猫的下班生存赛：${s.phase==='win'?'成功归家':'家被拆光'}！🐈\n🏠 家具 ${integrity}% · 🛵 剐蹭 ${s.hits} · ⚡ 险闪 ${s.nearMisses}\n🎲 ${seedCode(s.seed)} · ${s.score} 分，不服来战！\n${playableLink||''}\n#六点必须走`);openSocial('https://twitter.com/intent/tweet?text='+encodeURIComponent(tweet));setShareStatus(T('X draft opened with your challenge code. Add your PNG manually.','X 发帖页已填入挑战码，图片请手动添加。'));}
+
+function shareWhatsApp(){if(!shareCache)return;openSocial('https://api.whatsapp.com/send?text='+encodeURIComponent(shareCache.caption));setShareStatus(T('WhatsApp opened with your caption. Attach PNG separately.','已打开 WhatsApp 分享页，文字已带入。图片可单独附加。'))}
+function shareTelegram(){if(!shareCache)return;openSocial('https://t.me/share/url?url=&text='+encodeURIComponent(shareCache.caption));setShareStatus(T('Telegram opened with your caption. Attach PNG separately.','已打开 Telegram 分享页，图片可单独附加。'))}
+function publicChallengeUrl(){try{const u=new URL(location.href);if(!/^https?:$/.test(u.protocol)||['localhost','127.0.0.1','0.0.0.0'].includes(u.hostname)||u.hostname.endsWith('.local'))return null;u.searchParams.set('seed',seedCode(game.seed));u.hash='';return u.toString()}catch(e){return null}}
+async function copyChallengeCode(){const code=seedCode(game.seed),link=publicChallengeUrl(),copyText=link?T('Beat my score! Play the same commute: ','来挑战我的同款路线：')+link:code;let ok=false;try{await navigator.clipboard.writeText(copyText);ok=true}catch(e){const el=document.createElement('textarea');el.value=copyText;el.style.position='fixed';el.style.top='0';document.body.appendChild(el);el.select();try{ok=document.execCommand('copy')}catch(_){}el.remove()}setShareStatus(ok?T('Copied challenge '+code+'. Send it to a friend to race the same route!','已复制挑战 '+code+'，发给朋友试试同款地图！'):T('Clipboard blocked. Copy this code: ','复制受限，请手动复制：')+code)}
+$('copyCode').addEventListener('click',copyChallengeCode);
+$('replayCode').addEventListener('click',()=>{const n=game.seed;runMode='custom';$('seedInput').value=seedCode(n);$('shareLayer').hidden=true;reset();start();});
+for(const button of document.querySelectorAll('.mode-btn'))button.addEventListener('click',()=>setRunMode(button.dataset.mode));
+$('seedInput').addEventListener('change',()=>{if(game?.phase==='menu'&&runMode==='custom'&&parseCode($('seedInput').value)!=null){game=makeRunWithSeed(parseCode($('seedInput').value));updateHud();}});
+
+$('openShare').addEventListener('click',openShare);$('closeShare').addEventListener('click',closeShare);$('savePoster').addEventListener('click',downloadPoster);$('copyCaption').addEventListener('click',copyCaption);$('nativeShare').addEventListener('click',shareNative);$('shareInstagram').addEventListener('click',shareInstagram);$('shareX').addEventListener('click',shareX);$('shareWhatsApp').addEventListener('click',shareWhatsApp);$('shareTelegram').addEventListener('click',shareTelegram);$('shareLayer').addEventListener('click',e=>{if(e.target===$('shareLayer'))closeShare()});
+function updateHud(){const s=game;if(!s)return;const p=s.player,area=currentArea(),left=Math.max(0,WORLD_END-p.x),percent=(p.x-START)/(WORLD_END-START)*100;
+ $('clockValue').textContent=timeText(s.time);$('paceTag').textContent=s.phase==='pause'?T('PAUSED','已暂停'):s.phase==='menu'?T('READY','准备下班'):s.phase==='win'?T('HOME!','到家啦'):s.phase==='lose'?T('TOO LATE','已迟到'):T(`${Math.floor(s.elapsed)}s elapsed`,`${Math.floor(s.elapsed)}秒真实时间`);
+ $('dayFill').style.width=clamp((s.time-1080)/76*100,0,100)+'%';$('catValue').textContent=Math.floor(s.cat)+'%';$('catFill').style.width=clamp(s.cat,0,100)+'%';$('catTag').textContent=s.pausedCat>0?T(`Cat paused ${Math.ceil(s.pausedCat)}s`,`喊猫生效 ${Math.ceil(s.pausedCat)}s`):s.cat>80?T('CRITICAL!','危险！'):s.cat>45?T('ON A RAMPAGE','持续作案'):T('MANAGEABLE','尚可控');$('energyValue').textContent=Math.floor(p.energy)+' / 100';$('energyFill').style.width=p.energy+'%';$('sprintTag').textContent=p.energy<17?T('EXHAUSTED','体力告急'):T('SHIFT SPRINT','SHIFT 冲刺');$('cashTag').textContent=T('💰 ¥'+s.money,'💰 '+s.money+'元');$('comboChip').textContent=s.dashTime>0?T(`⚡ ADRENALINE ${Math.ceil(s.dashTime)}s`,`⚡ 连闪爆发 ${Math.ceil(s.dashTime)}s`):s.dodgeChain>0?T(`⚡ DODGE CHAIN ×${s.dodgeChain}`,`⚡ 险闪连击 ×${s.dodgeChain}`):T('⚡ DODGE CHAIN 0','⚡ 险闪连击 0');$('comboChip').classList.toggle('hot',s.dashTime>0||s.dodgeChain>=2);$('distValue').textContent=(left/1000).toFixed(2)+' km';$('distFill').style.width=clamp(percent,0,100)+'%';$('areaChip').textContent='📍 '+translate(area.data.subtitle);$('weatherChip').textContent=area.data.id==='rain'?T('🌧️ DOWNPOUR · PUDDLES','🌧️ 暴雨中 · 水坑减速'):s.night>.72?T('🌙 NIGHT · LOW LIGHT','🌙 夜路 · 灯火渐暗'):'🌇 '+translate(area.data.weather);const tt=$('threatChip');tt.classList.toggle('active',!!s.threat);tt.textContent=s.threat?(s.threat.kind==='car'?T('🚕 CAR APPROACHING!','🚕 机动车道来车！'):s.threat.dir>0?T('🚨 SCOOTER BEHIND!','🚨 身后有电鸡！'):T('⚠️ WRONG-WAY SCOOTER!','⚠️ 迎面电鸡！')):T('🚶 SIDEWALK · LOOK BOTH WAYS','🚶 人行道 · 留意前后');
+ $('routeCaption').textContent=T(`${area.idx}/5 districts cleared · ${Math.round(percent)}% home`,`已通过 ${area.idx}/5 个街区 · ${Math.round(percent)}% 路程`);
+ $('route').innerHTML=s.route.map((a,i)=>`<div class="node ${i<area.idx?'done':i===area.idx?'current':''}"><b>${a.ico}</b>${translate(a.short)}</div>`).join('');
+ $('catMood').textContent=s.pausedCat>0?T('Cat: briefly distracted','橘座：短暂地被你叫住了'):s.cat<25?T('Cat: eyeing the drinking glass','橘座：正在观察桌上的玻璃杯'):s.cat<45?T('Cat: everything under control','橘座：一切尽在掌握'):s.cat<67?T('Cat: sofas are for scratching','橘座：沙发不是用来坐的'):s.cat<85?T('Cat: destruction in progress','橘座：毁灭进行时'):T('Cat: furniture elimination plan','橘座：家具清零计划');$('catNarr').textContent=s.pausedCat>0?T('You called out. It looks straight into the camera.','你喊了一声。它停下爪子，抬头看着监控摄像头。'):s.cat<25?T('It has done nothing yet. Somehow that is worse.','它什么都没做，但你就是不安心。'):s.cat<45?T('Did you just hear something ceramic shatter?','你仿佛听到了陶瓷碎裂的声音。'):s.cat<67?T('Fresh scratches appear on the sofa.','沙发上出现了几道不属于设计师的纹路。'):s.cat<85?T('Every piece of furniture is begging for mercy.','监控画面里，每个家具都在求救。'):T('Your cat is about to redecorate the entire apartment.','下一秒，它可能会把整个房子重新装修。');$('catpanel').classList.toggle('danger',s.cat>67);
+ $('gear').innerHTML=[T('🎒 WORK BAG','🎒 公文包'),s.umbrella?T('☂️ UMBRELLA','☂️ 折叠伞'):T('🪪 STAFF BADGE','🪪 员工工牌'),s.catUsed?T('📢 CAT CALL USED','📢 喊猫（已用）'):T('📢 CAT CALL ×1','📢 远程喊猫 ×1'),s.foodUsed?T('🥢 RICE ROLLS ×1','🥢 肠粉 ×1'):T('👟 COMMUTER SHOES','👟 通勤鞋'),s.shortcuts?T('⚡ SHORTCUTS ×'+s.shortcuts,'⚡ 捷径 ×'+s.shortcuts):null,s.dashTime>0?T('🔥 SPEED BOOST','🔥 疾走中'):null,s.guardTime>0?T('🦺 SECURITY ESCORT','🦺 保安护航'):null,s.lootTaken?T('🎁 LOOT ×'+s.lootTaken,'🎁 补给 ×'+s.lootTaken):null].filter(Boolean).map(x=>`<span class="tag">${x}</span>`).join('');$('catButton').disabled=s.catUsed||s.phase!=='play';if(s.catRule.id==='zoomies')$('catButton').innerHTML=T('📢 CALL CAT (Q) <em>Stop damage for 11s · Once per run</em>','📢 远程喊猫（Q）<em>暂停拆家 11 秒 · 每局一次</em>');$('hitTag').textContent=T(`⚠️ Sidewalk hits ${s.sideHits} · Near-misses ${s.nearMisses}`,`⚠️ 人行道剐蹭 ${s.sideHits} · 险闪 ${s.nearMisses}`);if(s.phase==='play')$('mission').textContent=s.nearest?(s.nearest.type==='shortcut'?T('Shortcut ahead. 35% chance of construction delays.','前方是捷径，但有 35% 概率被施工耽误。'):s.nearest.type==='stall'?T('¥12 rice rolls: +50 stamina, cat +7%','¥12 买肠粉：+50 体力，猫拆家 +7%'):T('¥8 umbrella: ignore puddle slowdown.','¥8 买伞：雨天水坑免疫。')):s.threat?(s.threat.kind==='car'?T('🚕 CAR APPROACHING!','🚕 机动车道来车！'):s.threat.dir>0?T('🚨 SCOOTER FROM BEHIND!','🚨 后方电鸡逼近！'):T('⚠️ WRONG-WAY SCOOTER!','⚠️ 前方电鸡逆行！'))+T(' DODGE NOW!',' 注意空隙，立即走位！'):T('Run home on the sidewalk. Dodge parked and moving scooters!','沿着人行道赶回家：躲停放电鸡，提防前后突然驶来的车。');$('interactHint').textContent=s.phase==='play'&&s.nearest?T('E INTERACT','E 交互'):'';
+ $('chaosTitle').textContent=T('🎲 RUN RULES · '+(s.mode==='daily'?'DAILY':s.mode==='custom'?'CHALLENGE':'RANDOM'),'🎲 本局随机规则 · '+(s.mode==='daily'?'每日':s.mode==='custom'?'挑战':'随机'));
+ $('seedBadge').textContent=seedCode(s.seed);
+ $('chaosBody').innerHTML=[s.city,s.catRule].map(r=>`<div class="chaos-pill"><b>${r.icon} ${lang==='zh'?r.zh:r.en}</b><span>${lang==='zh'?r.infoZh:r.infoEn}</span></div>`).join('');
+ $('goalText').classList.toggle('completed',s.questDone);$('goalText').textContent=(s.questDone?'✅ ':'🎯 ')+T('SIDE QUEST: ','支线挑战：')+(lang==='zh'?s.goal.zh:s.goal.en)+' · '+Math.min(s.goal.target,questProgress(s))+'/'+s.goal.target+(s.questDone?T(' · +250 pts',' · +250 分'):'');
+ $('log').textContent=bilingual(s.log);
+}
+
+function render(now){if(!game)return;let dt=lastFrame?Math.min(.07,(now-lastFrame)/1000):0;lastFrame=now;globalTick=now/1000;update(dt);drawScene(globalTick);drawCat(globalTick);if(now-lastHud>95){lastHud=now;updateHud()}anim=requestAnimationFrame(render)}
+$('restart').addEventListener('click',reset);$('modalButton').addEventListener('click',()=>{if(game.phase==='pause')pause();else if(game.phase==='menu')start();else{reset();start();}});$('catButton').addEventListener('click',callCat);$('pauseButton').addEventListener('click',pause);
+function keyMap(e){const k=e.key.toLowerCase();return ({arrowleft:'left',a:'left',arrowright:'right',d:'right',arrowup:'up',w:'up',arrowdown:'down',s:'down',shift:'sprint',' ':'sprint'})[k]}
+window.addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey)return;if(game?.phase==='event'&&(e.key==='1'||e.key==='2')){e.preventDefault();resolvePlotEvent(Number(e.key)-1);return}if(!$('shareLayer').hidden&&e.key==='Escape'){$('shareLayer').hidden=true;return}const k=keyMap(e);if(k){e.preventDefault();keys[k]=true;return}const x=e.key.toLowerCase();if(e.repeat)return;if(x==='e'){e.preventDefault();interact()}else if(x==='q'){e.preventDefault();callCat()}else if(x==='p'){e.preventDefault();pause()}else if(x==='r'){e.preventDefault();reset()}else if(x==='enter'&&game?.phase==='menu')start();});window.addEventListener('keyup',e=>{const k=keyMap(e);if(k){e.preventDefault();keys[k]=false}});window.addEventListener('blur',()=>{Object.keys(keys).forEach(k=>keys[k]=false);if(game?.phase==='play')pause()});
+for(const el of document.querySelectorAll('.touch')){const name=el.dataset.key,held=['up','down','left','right','sprint'].includes(name);el.addEventListener('pointerdown',e=>{e.preventDefault();try{el.setPointerCapture(e.pointerId)}catch(_){/* synthetic pointer event without active capture */}el.classList.add('pressed');if(held)keys[name]=true;else if(name==='interact')interact();else if(name==='cat')callCat()});for(const ev of ['pointerup','pointercancel','lostpointercapture'])el.addEventListener(ev,()=>{el.classList.remove('pressed');if(held)keys[name]=false});}
+window.__commuteTest={get state(){return game},start,reset,update,interact,callCat,finish,openPlotEvent,resolvePlotEvent,buildPoster,checkQuest,collectPickup,seedCode,parseCode,makeRunWithSeed,setRunMode,get poster(){return shareCache},openShare,keys};
+try{const q=new URLSearchParams(location.search).get('seed');if(q&&parseCode(q)!=null){runMode='custom';$('seedInput').value=seedCode(parseCode(q));}}catch(e){}
+reset();applyLocale();requestAnimationFrame(render);
+</script></body></html>

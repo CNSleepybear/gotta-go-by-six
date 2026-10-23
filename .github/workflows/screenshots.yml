@@ -1,0 +1,38 @@
+name: Verify game and refresh screenshots
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'scripts/capture.mjs'
+      - '.github/workflows/screenshots.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  screenshots:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install test browser
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Run browser tests and capture images
+        run: node scripts/capture.mjs
+      - name: Commit refreshed images
+        run: |
+          git add assets/gameplay.png assets/share-poster.png
+          if git diff --cached --quiet; then
+            echo "Screenshots already up to date"
+          else
+            git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -m "docs: refresh playable game screenshots [skip ci]"
+            git push origin HEAD:main
+          fi
